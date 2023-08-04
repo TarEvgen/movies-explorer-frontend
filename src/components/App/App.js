@@ -2,6 +2,7 @@ import './App.css';
 import { Routes, Route } from "react-router-dom";
 import Header from "../Header/Header";
 import Register from "../Register/Register";
+import Login from "../Login/Login";
 //import ProtectedRoute from "./ProtectedRoute";
 
 
@@ -18,6 +19,19 @@ function App() {
                 />
               }
             />
+
+<Route
+              path="/sign-in"
+              element={
+                <Login
+                  
+                />
+              }
+            />
+
+
+
+
               
       </Routes>
 
