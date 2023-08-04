@@ -1,6 +1,7 @@
 import './App.css';
-import { Routes } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 import Header from "../Header/Header";
+import Register from "../Register/Register";
 //import ProtectedRoute from "./ProtectedRoute";
 
 
@@ -9,6 +10,14 @@ function App() {
     <div className="App">
       <Header />
       <Routes>
+      <Route
+              path="/sign-up"
+              element={
+                <Register
+                  
+                />
+              }
+            />
               
       </Routes>
 
