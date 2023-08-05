@@ -3,6 +3,7 @@
   padding: 0;
   max-width: 1280px;
   min-height: 608px;
+  background-color: #FFF;
 }
 
 .about__title {
@@ -20,7 +21,44 @@
   padding-top: 110px;
   padding-bottom: 23px;
   box-sizing: border-box;
-  
   border-bottom: 1px solid #000;
+}
 
+.about__project-list {
+  margin: 0;
+  padding: 0;
+  max-width: 1140px;
+  margin-left: auto;
+  margin-right: auto;
+  list-style-type: none;
+  display: flex;
+}
+
+.project__progress-list {
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
+  display: flex;
+  justify-content: flex-start;
+  
+}
+
+.project__progress {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+}
+
+.project__progress-name {
+  background-color: #F2F2F2;
+  min-height: 36px;
+  
+}
+
+.project__progress-name_end {
+  background-color: #2BE080;
+}
+
+.project__progress_distance {
+  max-width: 228px;
 }
