@@ -3,6 +3,8 @@ import { Routes, Route } from "react-router-dom";
 import Header from "../Header/Header";
 import Register from "../Register/Register";
 import Login from "../Login/Login";
+import Main from "../Main/Main";
+
 //import ProtectedRoute from "./ProtectedRoute";
 
 
@@ -11,6 +13,12 @@ function App() {
     <div className="App">
       <Header />
       <Routes>
+
+      <Route path='/' element={
+     
+     <Main />
+      
+      } />
       <Route
               path="/sign-up"
               element={
@@ -37,20 +45,6 @@ function App() {
 
 
 
-   {/*   <Routes>
-
-
-      <Route
-              path="/"
-              element={
-                <ProtectedRoute
-                  
-                />
-              }
-            />
-
-      </Routes>
-    */}
       
     </div>
   );

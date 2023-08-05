@@ -6,15 +6,8 @@ function Login() {
     <>
       <form className="form">
         <div className="logo logo__form"></div>
-        <h2 className="form__name">Добро пожаловать!</h2>
-
-        <label className="form__input-name">
-          Имя
-          <input className="form__input" id="name" />
-          <span className="form__imput-error"></span>
-        </label>
-
-        <label className="form__input-name">
+        <h2 className="form__name">Рады видеть!</h2>
+          <label className="form__input-name">
           E-mail
           <input className="form__input" id="e-mail" />
           <span className="form__imput-error"></span>
@@ -26,8 +19,8 @@ function Login() {
           <span className="form__imput-error"></span>
         </label>
 
-        <button className="form__button" type="submit">
-          Зарегистрироваться
+        <button className="form__button form__button_login" type="submit">
+          Войти
         </button>
 
         <div className="form__signin">
