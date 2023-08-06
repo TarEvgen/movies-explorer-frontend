@@ -3,7 +3,7 @@
   padding: 0;
   max-width: 1280px;
   min-height: 608px;
-  background-color: #FFF;
+  background-color: #fff;
 }
 
 .about__title {
@@ -16,22 +16,58 @@
   line-height: normal;
   letter-spacing: -0.88px;
   max-width: 1140px;
-  margin-left: auto;
-  margin-right: auto;
+  margin-left: 70px;
+  margin-right: 70px;
   padding-top: 110px;
   padding-bottom: 23px;
   box-sizing: border-box;
   border-bottom: 1px solid #000;
 }
 
+.about__project {
+  margin: 0;
+  padding: 0;
+  max-width: 550px;
+  /*margin-right: 40px;*/
+}
+
+/*
+.about__project:last-of-type {
+  margin-right: 0;
+}*/
+
+.about__project-title {
+  margin: 0;
+  padding: 0;
+  font-family: Inter;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  letter-spacing: -0.8px;
+  margin-bottom: 26px;
+}
+
+.about__project-description {
+  margin: 0;
+  padding: 0;
+  font-family: Inter;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 20px;
+}
+
 .about__project-list {
   margin: 0;
   padding: 0;
   max-width: 1140px;
-  margin-left: auto;
-  margin-right: auto;
+  margin-top: 70px;
+  margin-left: 70px;
+  margin-right: 70px;
   list-style-type: none;
   display: flex;
+  column-gap: 40px;
 }
 
 .project__progress-list {
@@ -40,7 +76,12 @@
   list-style-type: none;
   display: flex;
   justify-content: flex-start;
-  
+  max-width: 1140px;
+  margin-top: 110px;
+  margin-bottom: 110px;
+
+  margin-left: 70px;
+  margin-right: 70px;
 }
 
 .project__progress {
@@ -50,15 +91,118 @@
 }
 
 .project__progress-name {
-  background-color: #F2F2F2;
+  display: flex;
+  margin: 0;
+  padding: 0;
+  background-color: #f2f2f2;
   min-height: 36px;
-  
+  align-items: center;
+  justify-content: center;
+  font-family: Inter;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+
+.project__progress-description {
+  margin: 0;
+  padding: 0;
+  color: #a0a0a0;
+  display: flex;
+  justify-content: center;
+  font-family: Inter;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 17px;
+  margin-top: 14px;
 }
 
 .project__progress-name_end {
-  background-color: #2BE080;
+  background-color: #2be080;
 }
 
 .project__progress_distance {
-  max-width: 228px;
+  max-width: calc(100% * 0.2);
 }
+
+@media screen and (max-width: 768px) {
+  .about__title {
+    margin-left: 50px;
+    margin-right: 50px;
+    padding-top: 90px;
+  }
+  .about__project-title {
+    margin-bottom: 22px;
+  }
+  .about__project-list {
+    margin-left: 50px;
+    margin-right: 50px;
+  }
+  .project__progress-list {
+    margin-left: 50px;
+    margin-right: 50px;
+    margin-top: 93px;
+    margin-bottom: 90px;
+  }
+  .about__project-description {
+    font-size: 12px;
+
+    line-height: 18px;
+  }
+  .project__progress_distance {
+    max-width: calc(100% * 0.21);
+  }
+}
+
+
+@media screen and (max-width: 620px) {
+  .about__project-list {
+    flex-direction: column;
+  }
+  .about__title {
+    margin-left: 18px;
+    margin-right: 18px;
+    padding-bottom: 28px;
+    
+    padding-top: 70px;
+    font-size: 18px;
+    letter-spacing: -0.72px;
+  }
+  .about__project-list {
+    margin-left: 18px;
+    margin-right: 18px;
+    margin-top: 60px;
+    row-gap: 56px;
+  }
+  .about__project-title {
+    margin-bottom: 18px;
+    font-size: 18px;
+    letter-spacing: -0.72px;
+  }
+  .about__project-description {
+    font-size: 11px;
+    line-height: 16px;
+  }
+  .project__progress-list {
+    margin-left: 18px;
+    margin-right: 18px;
+    margin-top: 60px;
+    margin-bottom: 70px;
+  }
+  .project__progress-name {
+    min-height: 35px;
+    font-size: 11px;
+  }
+  .project__progress-description {
+    font-size: 11px;
+    line-height: normal;
+    margin-top: 10px;
+  }
+  .project__progress_distance {
+    max-width: calc(100% * 0.35);
+  }
+}
+
+
