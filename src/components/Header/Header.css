@@ -74,36 +74,3 @@
       font-size: 10px;
     }
   }
-
- /*
-  
-  @media screen and (max-width: 620px) {
-    .header__link {
-      font-size: 14px;
-      line-height: 17px;
-      margin-right: 27px;
-    }
-  }
-  
-
-
-  
-  @media screen and (max-width: 620px) {
-    .header__link_login {
-      margin-right: 0;
-      width: 100%;
-      order: 1;
-      text-align: center;
-      font-size: 18px;
-      line-height: 22px;
-    }
-  }
-
-
-  @media screen and (max-width: 620px) {
-    .header__link_out {
-      font-size: 18px;
-      line-height: 22px;
-    }
-  }
-  */
