@@ -154,7 +154,12 @@
   .project__progress_distance {
     max-width: calc(100% * 0.21);
   }
+  .about {
+    min-height: 585px;
+  }
 }
+
+
 
 
 @media screen and (max-width: 620px) {
