@@ -97,7 +97,7 @@
     padding-top: 22px;
     margin-left: auto;
     margin-right: auto;
-    max-width: 90%;
+    max-width: 60%;
   }
   .techs__name {
     height: 57px;
@@ -140,9 +140,9 @@
       }
 
       .techs {
-        
+        min-height: 708px;
         background-color: #FFF;
-        min-height: 651px;
+        
         
       }
       .about__title_techs {
@@ -151,6 +151,9 @@
       .techs__title {
         padding-top: 60px;
       }
+      .techs__subtitle {
+        max-width: 80%;
+        padding-top: 25px;
+      }
   }
 
-  
