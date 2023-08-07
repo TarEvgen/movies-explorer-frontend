@@ -1,4 +1,47 @@
-.about-me {
-  max-width: 1280px;
-  min-height: 608px;
+.about-me__block {
+  margin: 0;
+  padding: 0;
+  display: flex;
+  max-width: 1140px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.about-me__info {
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.about-me__name {
+  margin: 0;
+  padding: 0;
+  font-family: Inter;
+  font-size: 50px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 58px;
+  letter-spacing: -2px;
+}
+
+.about-me__activity {
+  margin: 0;
+  padding: 0;
+}
+
+.about-me__description {
+  margin: 0;
+  padding: 0;
+}
+
+.about-me__link {
+
+}
+
+.about-me__foto {
+  max-width: 270px;
+  height: 327px;
+  object-fit: cover;
+  border-radius: 10px;
 }
