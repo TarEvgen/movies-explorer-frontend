@@ -22,7 +22,8 @@ function AboutMe() {
           В&nbsp;2023 прошёл курс по&nbsp;веб-разработке, начал заниматься
           фриланс-заказами и&nbsp;ушёл с&nbsp;постоянной работы.
         </p>
-        <a className="about-me__link" href="https://github.com/TarEvgen">Github</a>
+        <a className="about-me__link" href="https://github.com/TarEvgen" target="_blank"
+            rel="noreferrer">Github</a>
       </div>
       <img className="about-me__foto" alt="фото профиля" src={Foto}></img>
       </div>
