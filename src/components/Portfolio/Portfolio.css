@@ -94,6 +94,7 @@
   .portfolio {
     margin-left: 14px;
     margin-right: 14px;
+    min-height: 301px;
   }
   .portfolio__title {
     font-size: 14px;
