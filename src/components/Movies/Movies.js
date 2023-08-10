@@ -1,8 +1,12 @@
+import SearchForm from "../SearchForm/SearchForm";
+
+
+
 
 function Movies() {
     return (
       <>
-        <h2>NТест</h2>
+        <SearchForm />
       </>
     );
   }
