@@ -17,14 +17,18 @@ function App() {
       <Routes>
 
       <Route path='/' element={
-     
+     <>
      <Main />
-      
+     <Footer />
+     </>
+
+
       } />
       <Route path='/movies' element={
-     
+     <>
      <Movies />
-     
+     <Footer />
+     </>
       } />
       <Route
               path="/sign-up"
@@ -49,7 +53,7 @@ function App() {
 
               
       </Routes>
-      <Footer />
+   
 
 
 

@@ -2,8 +2,13 @@
 import "./Footer.css";
 
 function Footer() {
+
+  
   return (
-    <footer class="footer">
+
+
+   
+   <footer class="footer">
         <h2 class="footer__title">Учебный проект Яндекс.Практикум х BeatFilm.</h2>
         
 <div className="footer__block">
@@ -17,8 +22,8 @@ function Footer() {
           </ul>
           </div>
     </footer>
-    
-    
+      
+     
 );
 }
 
