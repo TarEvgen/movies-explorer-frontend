@@ -5,6 +5,7 @@ import Register from "../Register/Register";
 import Login from "../Login/Login";
 import Main from "../Main/Main";
 import Footer from '../Footer/Footer';
+import Movies from '../Movies/Movies';
 
 //import ProtectedRoute from "./ProtectedRoute";
 
@@ -19,6 +20,11 @@ function App() {
      
      <Main />
       
+      } />
+      <Route path='/movies' element={
+     
+     <Movies />
+     
       } />
       <Route
               path="/sign-up"

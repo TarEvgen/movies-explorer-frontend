@@ -19,11 +19,22 @@ function Header() {
               </li>
             </ul>
             </header>
+    
           }
         />
-      </Routes>
+        <Route
+        path="/movies"
+        element={
+          <header className="header header_movies">
+          <div className="logo"></div>
+          </header>
+        }
+        
+        />
 
-    
+
+      </Routes>
+      
     
   );
 }
