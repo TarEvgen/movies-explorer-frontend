@@ -1,66 +1,92 @@
 .search-form {
-    margin: 0;
-    padding: 0;
-    max-width: 1280px;
-    min-height: 247px;
-    box-sizing: border-box;
-    padding-top: 60px;
-   
-   
-    
-   
+  margin: 0;
+  padding: 0;
+  max-width: 1280px;
+  min-height: 247px;
+  box-sizing: border-box;
+  padding-top: 60px;
+  display: flex;
+  flex-direction: column;
+
+  row-gap: 43px;
 }
 
-.search {
-    
-    max-width: 1140px;
-   
-    row-gap: 40px;
-   
+.search-form__checkbox {
+  max-width: 1140px;
+  align-self: center;
 }
 
-
-.search-form__search {
-   
-    margin: 0;
-    padding: 0;
-    min-height: 46px;
-    margin-left: 70px;
-    margin-right: 70px;
-    position: relative;
-    
+.search-form__search-bar {
+  display: flex;
+  flex-direction: row;
+  margin-left: 70px;
+  margin-right: 70px;
+  position: relative;
 }
-
 
 .search-form__field-search {
-    margin: 0;
-    padding: 0;
-    width: 100%;
-    height: 46px;
-    border-radius: 40px;
-    border: 0;
-    background-color: #F9F9F9;
-    position: absolute;
-    box-sizing: border-box;
-    padding-left: 22px;
-    font-family: Inter;
-font-size: 13px;
-font-style: normal;
-font-weight: 400;
-line-height: 17px;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 46px;
+  border-radius: 40px;
+  border: 0;
+  background-color: #f9f9f9;
+  outline: none;
+
+  box-sizing: border-box;
+  padding-left: 22px;
+  font-family: Inter;
+  font-size: 13px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 17px;
 }
 
 .search-form__button {
-    width: 80px;
-    height: 34px;
-    border: 0;
-    border-radius: 48px;
-    background-color: #FF6838;
-    position: absolute;
-    right: 6px;
-    top: 6px;
-    background-image: url(../../images/icon__paw.svg);
-    background-repeat: no-repeat;
-    background-size: 22px;
-    background-position: center;
+  width: 80px;
+  height: 34px;
+  border: 0;
+  border-radius: 48px;
+  background-color: #ff6838;
+  position: absolute;
+  right: 6px;
+  top: 6px;
+  background-image: url(../../images/icon__paw.svg);
+  background-repeat: no-repeat;
+  background-size: 22px;
+  background-position: center;
 }
+
+.search-form__line {
+  padding: 0;
+  margin: 0;
+  height: 0;
+  border: none;
+  border-bottom: 1px solid #e8e8e8;
+  padding-top: 26px;
+  margin-left: 70px;
+  margin-right: 70px;
+}
+
+
+@media screen and (max-width: 768px) {
+    .search-form__search-bar {
+        margin-left: 30px;
+        margin-right: 30px;
+    }
+    .search-form__line {
+        margin-left: 30px;
+        margin-right: 30px;
+        padding-top: 7px;
+      }
+      .search-form {
+       
+        padding-top: 80px;
+        
+      }
+  }
+
+  @media screen and (max-width: 620px) {
+    
+  }
