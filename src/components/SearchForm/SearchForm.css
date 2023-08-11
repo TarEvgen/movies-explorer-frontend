@@ -5,17 +5,26 @@
     min-height: 247px;
     box-sizing: border-box;
     padding-top: 60px;
+   
+   
     
+   
+}
+
+.search {
     
- 
+    max-width: 1140px;
+   
+    row-gap: 40px;
    
 }
 
 
 .search-form__search {
+   
     margin: 0;
     padding: 0;
-    
+    min-height: 46px;
     margin-left: 70px;
     margin-right: 70px;
     position: relative;
