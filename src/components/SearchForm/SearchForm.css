@@ -88,5 +88,18 @@
   }
 
   @media screen and (max-width: 620px) {
+    .search-form__search-bar {
+      margin-left: 14px;
+      margin-right: 14px;
+  }
+  .search-form__line {
+      margin-left: 14px;
+      margin-right: 14px;
+      
+    }
+
+  .search-form__field-search {
+    font-size: 11px;
+  }
     
   }

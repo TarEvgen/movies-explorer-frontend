@@ -6,6 +6,7 @@ import Login from "../Login/Login";
 import Main from "../Main/Main";
 import Footer from "../Footer/Footer";
 import Movies from "../Movies/Movies";
+import Navigation from "../Navigation/Navigation";
 
 //import ProtectedRoute from "./ProtectedRoute";
 
@@ -36,6 +37,7 @@ function App() {
 
         <Route path="/sign-in" element={<Login />} />
       </Routes>
+      <Navigation />
     </div>
   );
 }

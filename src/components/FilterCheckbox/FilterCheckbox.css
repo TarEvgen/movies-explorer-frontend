@@ -67,3 +67,11 @@
   background-color: #ffffff;
   left: 18px;
 }
+
+
+@media screen and (max-width: 620px) {
+  .checkbox__name{
+    font-size: 11px;
+  }
+  
+}
