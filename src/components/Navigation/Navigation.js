@@ -2,10 +2,11 @@ import { Link } from "react-router-dom";
 
 import "./Navigation.css";
 
-function Navigation() {
+function Navigation({isOpen}) {
+  console.log(isOpen, 'isOpen')
   return (
     <>
-    <div className="navigation">
+    <div className={`navigation ${isOpen ? "navigation_active" : ''}`}>
     <div className="navigation-menu">
       <button className="close__button"></button>
       
@@ -26,7 +27,7 @@ function Navigation() {
             </Link>
           </li>
         </ul>
-        <Link className="navigation__link" to="/profile">
+        <Link className="navigation__link navigation__link_profile" to="/profile">
           Аккаунт
         </Link>
       </div>

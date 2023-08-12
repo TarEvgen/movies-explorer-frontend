@@ -1,5 +1,6 @@
 import "./App.css";
 import { Routes, Route } from "react-router-dom";
+import { useState } from 'react';
 import Header from "../Header/Header";
 import Register from "../Register/Register";
 import Login from "../Login/Login";
@@ -11,9 +12,20 @@ import Navigation from "../Navigation/Navigation";
 //import ProtectedRoute from "./ProtectedRoute";
 
 function App() {
+
+
+  const [isOpenMenuNavigation, setOpenMenuNavigation] = useState(false);
+
+  function openMenuNavigation () {
+    setOpenMenuNavigation(true)
+  }
+
+
+
+
   return (
     <div className="App">
-      <Header />
+      <Header openMenu = {openMenuNavigation} />
       <Routes>
         <Route
           path="/"
@@ -37,7 +49,7 @@ function App() {
 
         <Route path="/sign-in" element={<Login />} />
       </Routes>
-      <Navigation />
+      <Navigation isOpen={isOpenMenuNavigation} />
     </div>
   );
 }

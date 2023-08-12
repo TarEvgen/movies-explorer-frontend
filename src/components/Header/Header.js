@@ -1,7 +1,12 @@
 import { Route, Routes, Link } from "react-router-dom";
+
 import "./Header.css";
 
-function Header() {
+function Header({openMenu}) {
+
+
+ console.log({openMenu}, '{openMenu }')
+
   return (
     
       <Routes>
@@ -34,7 +39,7 @@ function Header() {
               <li><Link className="header__link header__link_page-save-movies" to="/saved-movies">Сохранённые фильмы</Link></li>
             </ul>
             <Link className="header__link header__link_page-profile" to="/profile">Аккаунт</Link>
-            <button className="header__button-menu"></button>
+            <button className="header__button-menu" onClick={openMenu}></button>
           
           </header>
         }
