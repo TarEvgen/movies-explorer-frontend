@@ -20,6 +20,9 @@ function App() {
     setOpenMenuNavigation(true)
   }
 
+  function closeMenuNavigation () {
+    setOpenMenuNavigation(false)
+  }
 
 
 
@@ -49,7 +52,7 @@ function App() {
 
         <Route path="/sign-in" element={<Login />} />
       </Routes>
-      <Navigation isOpen={isOpenMenuNavigation} />
+      <Navigation isOpen={isOpenMenuNavigation} closeMenu = {closeMenuNavigation} />
     </div>
   );
 }

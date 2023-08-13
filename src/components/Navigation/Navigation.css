@@ -68,6 +68,11 @@
   align-items: center;
 }
 
+.navigation__link_active {
+  color: red;
+  font-size: 99px;
+}
+
 @media screen and (max-width: 768px) {
   .navigation {
     margin: 0;
@@ -85,5 +90,32 @@
 
   .navigation_active {
     transform: translateX(0);
+  }
+  
+}
+
+
+@media screen and (max-width: 620px) {
+  .navigation {
+    
+    width: 100%;
+   
+   
+  }
+  
+  
+  .navigation-menu {
+    
+    width: 100%;
+    padding-top: 144px;
+  padding-bottom: 46px;
+    
+  }
+
+
+  .navigation__link-list {
+    
+    row-gap: 24px;
+    
   }
 }

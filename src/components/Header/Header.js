@@ -5,7 +5,7 @@ import "./Header.css";
 function Header({openMenu}) {
 
 
- console.log({openMenu}, '{openMenu }')
+ 
 
   return (
     
