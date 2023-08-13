@@ -12,23 +12,23 @@ function Navigation({isOpen, closeMenu}) {
 
   return (
     <>
-    <div className={`navigation ${isOpen ? "navigation_active" : ''}`}>
+    <div className={`navigation ${isOpen ? "navigation_active" : ""}`}>
     <div className="navigation-menu">
       <button className="close__button" onClick={closeMenu} ></button>
       
         <ul className="navigation__link-list">
           <li>
-            <Link className="navigation__link" activeClassName="navigation__link_active" to="/">
+            <Link className={`navigation__link ${location.pathname === "/" ? "navigation__link_active" : ""}`} to="/" onClick={closeMenu}>
               Главная
             </Link>
           </li>
           <li>
-            <Link className="navigation__link" activeClassName="navigation__link_active" to="/movies">
+            <Link className={`navigation__link ${location.pathname === "/movies" ? "navigation__link_active" : ""}`} to="/movies" onClick={closeMenu}>
               Фильмы
             </Link>
           </li>
           <li>
-            <Link className="navigation__link" activeClassName="navigation__link_active" to="/saved-movies">
+            <Link className={`navigation__link ${location.pathname === "/saved-movies" ? "navigation__link_active" : ""}`} to="/saved-movies" onClick={closeMenu}>
               Сохранённые фильмы
             </Link>
           </li>
