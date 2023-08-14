@@ -1,0 +1,49 @@
+.form__edit-name {
+  min-height: 14px;
+  font-family: Inter;
+  font-size: 11px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  flex-direction: row;
+  
+  
+}
+
+
+
+
+.form__name_profile {
+    margin-top: 5px;
+
+}
+
+.form_profile {
+    text-align: center;
+    max-width: 410px;
+}
+
+.profile__name {
+    
+    
+    width: 150px;
+}
+
+
+
+
+
+
+
+.form__edit-input {
+    
+    background-color: #fff;
+    border: 0;
+    outline: none;
+    width: 90%;
+    text-align: right;
+   
+}

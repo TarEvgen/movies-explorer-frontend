@@ -3,20 +3,31 @@ import { Link } from "react-router-dom";
 
 function Profile() {
   return (
-    <form className="form">
-    <div className="logo logo__form"></div>
-    <h2 className="form__name">Рады видеть!</h2>
-      <label className="form__input-name">
-      E-mail
-      <input className="form__input" id="e-mail" />
-      <span className="form__imput-error"></span>
+    <form className="form form_profile">
+    
+    <h2 className="form__name form__name_profile">Привет, Виталий!</h2>
+     
+     
+     
+     
+      <label className="form__edit-name">
+        Имя
+        <input className="form__edit-input" id="name" placeholder="Виталий" />
+         
     </label>
 
-    <label className="form__input-name">
-      Пароль
-      <input type="password" className="form__input" id="password" />
-      <span className="form__imput-error"></span>
+
+    <label className="form__edit-name">
+    <nobr>E-mail</nobr>
+        <input className="form__edit-input" id="name" placeholder="pochta@yandex.ru" />
+         
     </label>
+
+
+
+
+
+   
 
     <button className="form__button form__button_login" type="submit">
       Войти
