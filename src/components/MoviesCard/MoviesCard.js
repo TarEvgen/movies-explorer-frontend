@@ -1,7 +1,7 @@
 import "./MoviesCard.css";
 
 
-function MoviesCard () {
+function MoviesCard ({handleSaveClick, isSave }) {
     return (
       
       <li className="card">
@@ -12,14 +12,24 @@ function MoviesCard () {
         
       />
       <h2 className="card__title-movies">33 слова о дизайне</h2>
+      
+      
+    
+      <button
+          className={`card__save-button ${
+            isSave && "card__save-button_active"
+          }`}
+          onClick={handleSaveClick}
+          type="button"
+        ></button>
+     
       <p className="card__duration-movies">1ч42м</p>
-      <input className="card__button-save"
-        
-        type="checkbox"
-      ></input>
+      
       
       
         </li>
+
+        
     
       
     );

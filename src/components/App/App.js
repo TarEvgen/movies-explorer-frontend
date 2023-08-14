@@ -8,6 +8,8 @@ import Main from "../Main/Main";
 import Footer from "../Footer/Footer";
 import Movies from "../Movies/Movies";
 import Navigation from "../Navigation/Navigation";
+import SavedMovies from "../SavedMovies/SavedMovies";
+import Profile from "../Profile/Profile";
 
 //import ProtectedRoute from "./ProtectedRoute";
 
@@ -47,7 +49,37 @@ function App() {
               <Footer />
             </>
           }
+
+          
         />
+
+<Route
+          path="/saved-movies"
+          element={
+            <>
+              <SavedMovies/>
+              <Footer />
+            </>
+          }
+
+          
+        />
+
+<Route
+          path="/profile"
+          element={
+            <>
+              <Profile />
+            </>
+          }
+
+          
+        />
+
+
+
+
+
         <Route path="/sign-up" element={<Register />} />
 
         <Route path="/sign-in" element={<Login />} />

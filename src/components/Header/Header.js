@@ -2,6 +2,8 @@ import { Route, Routes, Link } from "react-router-dom";
 
 import "./Header.css";
 
+import  HeaderMovies from "../HeaderMovies/HeaderMovies"
+
 function Header({openMenu}) {
 
 
@@ -30,21 +32,35 @@ function Header({openMenu}) {
         <Route
         path="/movies"
         element={
-          <header className="header header_movies">
-          <div className="logo"></div>
-          
-            <ul className="header__link-list header__link-list_page-movies">
-              
-              <li><Link className="header__link header__link_page-movies" to="/movies">Фильмы</Link></li>
-              <li><Link className="header__link header__link_page-save-movies" to="/saved-movies">Сохранённые фильмы</Link></li>
-            </ul>
-            <Link className="header__link header__link_page-profile" to="/profile">Аккаунт</Link>
-            <button className="header__button-menu" onClick={openMenu}></button>
-          
-          </header>
+          <HeaderMovies openMenu={openMenu}/>
         }
+
+        
         
         />
+<Route
+        path="/saved-movies"
+        element={
+          <HeaderMovies openMenu={openMenu}/>
+        }
+
+        
+        
+        />
+
+<Route
+          path="/profile"
+          element={
+            <>
+              <HeaderMovies />
+            </>
+          }
+
+          
+        />
+
+
+
 
 
       </Routes>
