@@ -10,6 +10,7 @@ import Movies from "../Movies/Movies";
 import Navigation from "../Navigation/Navigation";
 import SavedMovies from "../SavedMovies/SavedMovies";
 import Profile from "../Profile/Profile";
+import PageNotFound from "../PageNotFound/PageNotFound"
 
 //import ProtectedRoute from "./ProtectedRoute";
 
@@ -83,6 +84,16 @@ function App() {
         <Route path="/sign-up" element={<Register />} />
 
         <Route path="/sign-in" element={<Login />} />
+
+        <Route
+              path="*"
+              element={
+                <PageNotFound />
+              }
+            />
+
+
+
       </Routes>
       <Navigation isOpen={isOpenMenuNavigation} closeMenu = {closeMenuNavigation} />
     </div>
