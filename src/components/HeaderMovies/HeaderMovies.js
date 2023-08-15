@@ -10,7 +10,7 @@ function HeaderMovies({openMenu}) {
   return (
     
           <header className="header header_movies">
-          <div className="logo"></div>
+          <Link className="logo" to="/"></Link>
           
             <ul className="header__link-list header__link-list_page-movies">
               

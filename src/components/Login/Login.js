@@ -5,9 +5,9 @@ function Login() {
   return (
     <>
       <form className="form">
-        <div className="logo logo__form"></div>
+        <Link className="logo logo__form" to="/"></Link>
         <h2 className="form__name">Рады видеть!</h2>
-          <label className="form__input-name">
+        <label className="form__input-name">
           E-mail
           <input className="form__input" id="e-mail" />
           <span className="form__imput-error"></span>

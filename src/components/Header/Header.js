@@ -52,7 +52,7 @@ function Header({openMenu}) {
           path="/profile"
           element={
             <>
-              <HeaderMovies />
+              <HeaderMovies openMenu={openMenu} />
             </>
           }
 
