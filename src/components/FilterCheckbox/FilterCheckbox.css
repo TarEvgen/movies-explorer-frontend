@@ -1,12 +1,18 @@
 .checkbox-block {
   display: flex;
   width: max-content;
+  transition: opacity 0.7s;
+}
+
+.checkbox-block:hover {
+  opacity: 0.8;
 }
 
 .checkbox {
   margin: 0;
   padding: 0;
   display: flex;
+  cursor: pointer;
 }
 
 .checkbox__input {
@@ -68,10 +74,8 @@
   left: 18px;
 }
 
-
 @media screen and (max-width: 620px) {
-  .checkbox__name{
+  .checkbox__name {
     font-size: 11px;
   }
-  
 }

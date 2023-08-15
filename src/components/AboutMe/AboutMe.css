@@ -66,7 +66,16 @@
   line-height: normal;
   color: #000;
   text-decoration: none;
+  transition: opacity 0.7s;
+  cursor: pointer;
 }
+
+.about-me__link:hover {
+  opacity: 0.7;
+}
+
+
+
 
 .about-me__foto {
   max-width: 270px;

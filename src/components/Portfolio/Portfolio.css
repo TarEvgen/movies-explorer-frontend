@@ -4,7 +4,7 @@
   max-width: 1140px;
   margin-left: 70px;
   margin-right: 70px;
-  
+
   min-height: 423px;
 }
 
@@ -53,12 +53,24 @@
   letter-spacing: -1.2px;
   color: #000;
   max-width: 1140px;
+  cursor: pointer;
+  transition: opacity 0.7s;
 }
 
 .portfolio__link-img {
   position: absolute;
   right: 6px;
   padding-top: 19px;
+  cursor: pointer;
+  transition: opacity 0.7s;
+}
+
+.portfolio__link:hover {
+  opacity: 0.7;
+}
+
+.portfolio__link-img:hover {
+  opacity: 0.7;
 }
 
 @media screen and (max-width: 768px) {
