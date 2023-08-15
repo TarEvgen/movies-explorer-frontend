@@ -5,7 +5,7 @@ function Register() {
   return (
     <>
       <form className="form">
-        <Link className="logo logo__form" to='/'></Link>
+        <Link className="logo logo__form" to="/"></Link>
         <h2 className="form__name">Добро пожаловать!</h2>
 
         <label className="form__input-name">

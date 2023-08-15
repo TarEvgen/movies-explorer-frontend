@@ -1,6 +1,6 @@
 import "./App.css";
 import { Routes, Route } from "react-router-dom";
-import { useState } from 'react';
+import { useState } from "react";
 import Header from "../Header/Header";
 import Register from "../Register/Register";
 import Login from "../Login/Login";
@@ -10,28 +10,24 @@ import Movies from "../Movies/Movies";
 import Navigation from "../Navigation/Navigation";
 import SavedMovies from "../SavedMovies/SavedMovies";
 import Profile from "../Profile/Profile";
-import PageNotFound from "../PageNotFound/PageNotFound"
+import PageNotFound from "../PageNotFound/PageNotFound";
 
 //import ProtectedRoute from "./ProtectedRoute";
 
 function App() {
-
-
   const [isOpenMenuNavigation, setOpenMenuNavigation] = useState(false);
 
-  function openMenuNavigation () {
-    setOpenMenuNavigation(true)
+  function openMenuNavigation() {
+    setOpenMenuNavigation(true);
   }
 
-  function closeMenuNavigation () {
-    setOpenMenuNavigation(false)
+  function closeMenuNavigation() {
+    setOpenMenuNavigation(false);
   }
-
-
 
   return (
     <div className="App">
-      <Header openMenu = {openMenuNavigation} />
+      <Header openMenu={openMenuNavigation} />
       <Routes>
         <Route
           path="/"
@@ -50,52 +46,32 @@ function App() {
               <Footer />
             </>
           }
-
-          
         />
-
-<Route
+        <Route
           path="/saved-movies"
           element={
             <>
-              <SavedMovies/>
+              <SavedMovies />
               <Footer />
             </>
           }
-
-          
         />
-
-<Route
+        <Route
           path="/profile"
           element={
             <>
               <Profile />
             </>
           }
-
-          
         />
-
-
-
-
-
         <Route path="/sign-up" element={<Register />} />
-
         <Route path="/sign-in" element={<Login />} />
-
-        <Route
-              path="*"
-              element={
-                <PageNotFound />
-              }
-            />
-
-
-
+        <Route path="*" element={<PageNotFound />} />
       </Routes>
-      <Navigation isOpen={isOpenMenuNavigation} closeMenu = {closeMenuNavigation} />
+      <Navigation
+        isOpen={isOpenMenuNavigation}
+        closeMenu={closeMenuNavigation}
+      />
     </div>
   );
 }

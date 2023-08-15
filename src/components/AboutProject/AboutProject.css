@@ -28,13 +28,7 @@
   margin: 0;
   padding: 0;
   max-width: 550px;
-  /*margin-right: 40px;*/
 }
-
-/*
-.about__project:last-of-type {
-  margin-right: 0;
-}*/
 
 .about__project-title {
   margin: 0;
@@ -79,7 +73,6 @@
   max-width: 1140px;
   margin-top: 110px;
   margin-bottom: 110px;
-
   margin-left: 70px;
   margin-right: 70px;
 }
@@ -159,9 +152,6 @@
   }
 }
 
-
-
-
 @media screen and (max-width: 620px) {
   .about__project-list {
     flex-direction: column;
@@ -170,7 +160,7 @@
     margin-left: 18px;
     margin-right: 18px;
     padding-bottom: 28px;
-    
+
     padding-top: 70px;
     font-size: 18px;
     letter-spacing: -0.72px;
@@ -209,5 +199,3 @@
     max-width: calc(100% * 0.35);
   }
 }
-
-

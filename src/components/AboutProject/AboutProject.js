@@ -24,9 +24,11 @@ function AboutProject() {
           </p>
         </li>
       </ul>
-      <ul className="project__progress-list" >
+      <ul className="project__progress-list">
         <li className="project__progress project__progress_distance">
-          <p className="project__progress-name project__progress-name_end">1 неделя</p>
+          <p className="project__progress-name project__progress-name_end">
+            1 неделя
+          </p>
           <p className="project__progress-description">Back-end</p>
         </li>
         <li className="project__progress">

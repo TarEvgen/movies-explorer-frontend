@@ -6,16 +6,16 @@ import AboutMe from "../AboutMe/AboutMe";
 import Portfolio from "../Portfolio/Portfolio";
 
 function Main() {
-    return (
-      <>
-        <Promo />
-        <NavTab />
-        <AboutProject />
-        <Techs />
-        <AboutMe />
-        <Portfolio />
-      </>
-    );
-  }
-  
-  export default Main;
+  return (
+    <>
+      <Promo />
+      <NavTab />
+      <AboutProject />
+      <Techs />
+      <AboutMe />
+      <Portfolio />
+    </>
+  );
+}
+
+export default Main;
