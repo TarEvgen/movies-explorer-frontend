@@ -9,7 +9,7 @@
   opacity: 0.8;
 }
 
-.header-movies__link {
+.header__link-movies {
   margin: 0;
   padding: 0;
   color: #000;
@@ -22,11 +22,11 @@
   transition: opacity 0.7s;
 }
 
-.header-movies__link:hover {
+.header__link-movies:hover {
   opacity: 0.7;
 }
 
-.header-movies__link_active {
+.header__link-movies_active {
   font-weight: 500;
 }
 

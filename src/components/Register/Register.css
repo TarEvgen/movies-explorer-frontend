@@ -46,6 +46,10 @@
   padding-left: 15px;
 }
 
+.form__input:focus-visible {
+  outline: 2px solid #2BE080;
+}
+
 .form__button {
   border-radius: 3px;
   min-height: 45px;
@@ -101,11 +105,11 @@
   min-height: 12px;
 }
 
-.logo__form {
+.logo_form {
   transition: opacity 0.7s;
 }
 
-.logo__form:hover {
+.logo_form:hover {
   opacity: 0.8;
 }
 
@@ -116,7 +120,7 @@
 }
 
 @media screen and (max-width: 620px) {
-  .logo__form {
+  .logo_form {
     align-self: center;
   }
 }

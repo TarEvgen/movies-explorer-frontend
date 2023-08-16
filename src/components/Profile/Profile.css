@@ -39,7 +39,11 @@
   color: #000;
 }
 
-.button__edit-profile {
+.form__edit-input:focus-visible {
+  outline: 1px solid #2BE080;
+}
+
+.button-edit {
   margin: 0;
   padding: 0;
   text-align: center;
@@ -55,18 +59,17 @@
   cursor: pointer;
 }
 
-.button__edit-profile:hover {
+.button-edit:hover {
   opacity: 0.8;
 }
 
-
-.button__edit-profile_out {
+.button-edit_out {
   color: #ee3465;
   margin-top: 17px;
   margin-bottom: 40px;
 }
 
-.search-form__line_profile {
+.line_profile {
   margin: 0;
   padding: 0;
   margin-bottom: 16px;
@@ -79,10 +82,10 @@
   .form__name_profile {
     margin-bottom: 96px;
   }
-  .button__edit-profile {
+  .button-edit {
     margin-top: 210px;
   }
-  .button__edit-profile_out {
+  .button-edit_out {
     margin-top: 17px;
     margin-bottom: 40px;
   }
@@ -97,11 +100,11 @@
   .form__name_profile {
     margin-bottom: 80px;
   }
-  .button__edit-profile {
+  .button-edit {
     margin-top: 379px;
     font-size: 12px;
   }
-  .button__edit-profile_out {
+  .button-edit_out {
     margin-top: 17px;
     margin-bottom: 40px;
   }

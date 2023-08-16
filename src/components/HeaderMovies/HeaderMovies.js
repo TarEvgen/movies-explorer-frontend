@@ -13,9 +13,9 @@ function HeaderMovies({ openMenu }) {
       <ul className="header__link-list header__link-list_page-movies">
         <li>
           <Link
-            className={`header-movies__link ${
+            className={`header__link-movies ${
               location.pathname === "/movies"
-                ? "header-movies__link_active"
+                ? "header__link-movies_active"
                 : ""
             }`}
             to="/movies"
@@ -26,9 +26,9 @@ function HeaderMovies({ openMenu }) {
 
         <li>
           <Link
-            className={`header-movies__link ${
+            className={`header__link-movies ${
               location.pathname === "/saved-movies"
-                ? "header-movies__link_active"
+                ? "header__link-movies_active"
                 : ""
             }`}
             to="/saved-movies"

@@ -8,7 +8,7 @@ function Profile() {
         Имя
         <input className="form__edit-input" id="name" placeholder="Виталий" />
       </label>
-      <div className="search-form__line search-form__line_profile"></div>
+      <div className="line line_profile"></div>
       <label className="form__edit-name">
         <nobr>E-mail</nobr>
         <input
@@ -17,11 +17,11 @@ function Profile() {
           placeholder="pochta@yandex.ru"
         />
       </label>
-      <button className="button__edit-profile" type="submit">
+      <button className="button-edit" type="submit">
         Редактировать
       </button>
       <button
-        className="button__edit-profile button__edit-profile_out"
+        className="button-edit button-edit_out"
         type="submit"
       >
         Выйти из аккаунта

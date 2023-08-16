@@ -73,6 +73,7 @@
     padding-left: 30px;
     padding-right: 30px;
     padding-top: 45px;
+    background-color: #fff;
   }
 }
 
@@ -83,7 +84,6 @@
   .footer {
     padding-left: 10px;
     padding-right: 10px;
-    background-color: #fff;
     padding-top: 72px;
     min-height: 201px;
   }

@@ -11,7 +11,7 @@ function MoviesCardList() {
 
   return (
     <section className="movies-cards">
-      <ul className="card__list">
+      <ul className="movies-cards__list">
         <MoviesCard handleSaveClick={changeState} isSave={isSave} />
         <MoviesCard />
         <MoviesCard />

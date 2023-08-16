@@ -3,8 +3,8 @@ import "./AboutProject.css";
 function AboutProject() {
   return (
     <section id="about" className="about">
-      <h2 className="about__title">О проекте</h2>
-      <ul className="about__project-list">
+      <h2 className="title">О проекте</h2>
+      <ul className="about-list">
         <li className="about__project">
           <h3 className="about__project-title">
             Дипломный проект включал 5 этапов
@@ -24,7 +24,7 @@ function AboutProject() {
           </p>
         </li>
       </ul>
-      <ul className="project__progress-list">
+      <ul className="project">
         <li className="project__progress project__progress_distance">
           <p className="project__progress-name project__progress-name_end">
             1 неделя

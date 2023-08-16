@@ -10,7 +10,7 @@ function Navigation({ isOpen, closeMenu }) {
     <>
       <div className={`navigation ${isOpen ? "navigation_active" : ""}`}>
         <div className="navigation-menu">
-          <button className="close__button" onClick={closeMenu}></button>
+          <button className="close" onClick={closeMenu}></button>
 
           <ul className="navigation__link-list">
             <li>

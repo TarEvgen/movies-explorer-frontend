@@ -7,7 +7,7 @@
   flex-direction: column;
 }
 
-.about__title_techs {
+.title_techs {
   padding-top: 100px;
 }
 
@@ -73,7 +73,7 @@
     min-height: 567px;
   }
 
-  .about__title_techs {
+  .title_techs {
     padding-top: 90px;
   }
   .techs__title {
@@ -136,7 +136,7 @@
     min-height: 708px;
     background-color: #fff;
   }
-  .about__title_techs {
+  .title_techs {
     padding-top: 126px;
   }
   .techs__title {
