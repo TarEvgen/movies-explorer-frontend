@@ -1,0 +1,9 @@
+.App {
+  max-width: 1280px;
+  margin: 0;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 0;
+  font-family: "Inter", Arial, sans-serif;
+  min-height: 100vh;
+}

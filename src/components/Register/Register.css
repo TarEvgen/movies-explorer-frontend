@@ -1,0 +1,153 @@
+.form {
+  display: flex;
+  flex-direction: column;
+  max-width: 396px;
+  margin: 0;
+  padding: 0;
+  padding-top: 70px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.form__name {
+  margin: 0;
+  padding: 0;
+  margin-top: 40px;
+  margin-bottom: 40px;
+  font-family: Inter;
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+}
+
+.form__input-name {
+  display: flex;
+  flex-direction: column;
+  font-family: "Inter";
+  font-style: normal;
+  line-height: normal;
+  font-size: 10px;
+  color: #a0a0a0;
+}
+
+.form__input {
+  margin-top: 10px;
+  margin-bottom: 8px;
+  min-height: 46px;
+  border-radius: 8px;
+  background-color: #f9f9f9;
+  border-width: 0;
+  outline: none;
+  font-family: "Inter";
+  font-style: normal;
+  line-height: normal;
+  font-size: 13px;
+  padding-left: 15px;
+}
+
+.form__input:focus-visible {
+  outline: 2px solid #2BE080;
+}
+
+.form__button {
+  border-radius: 3px;
+  min-height: 45px;
+  background-color: #ff6838;
+  border-width: 0;
+  color: #ffffff;
+  font-family: "Inter";
+  font-style: normal;
+  line-height: normal;
+  font-size: 14px;
+  margin-top: 67px;
+  transition: opacity 0.7s;
+  cursor: pointer;
+}
+
+.form__button:hover {
+  opacity: 0.8;
+}
+
+.form__signin {
+  display: flex;
+  justify-content: center;
+  margin-top: 16px;
+}
+
+.form__signin-question {
+  margin: 0;
+  color: #a0a0a0;
+  font-family: "Inter";
+  font-style: normal;
+  line-height: normal;
+  font-size: 14px;
+  margin-right: 6px;
+}
+
+.form__login-link {
+  color: #ff6838;
+  font-family: "Inter";
+  font-style: normal;
+  line-height: normal;
+  font-size: 14px;
+  text-decoration: none;
+  transition: opacity 0.7s;
+  cursor: pointer;
+}
+
+.form__login-link:hover {
+  opacity: 0.7;
+}
+
+.form__imput-error {
+  color: #ee3465;
+  min-height: 12px;
+}
+
+.logo_form {
+  transition: opacity 0.7s;
+}
+
+.logo_form:hover {
+  opacity: 0.8;
+}
+
+@media screen and (max-width: 620px) {
+  .form {
+    max-width: 260px;
+  }
+}
+
+@media screen and (max-width: 620px) {
+  .logo_form {
+    align-self: center;
+  }
+}
+
+@media screen and (max-width: 620px) {
+  .form__name {
+    align-self: center;
+    margin-bottom: 82px;
+    margin-top: 51px;
+  }
+}
+
+@media screen and (max-width: 620px) {
+  .form__button {
+    margin-top: 153px;
+    font-size: 12px;
+  }
+}
+
+@media screen and (max-width: 620px) {
+  .form__login-link {
+    font-size: 12px;
+  }
+}
+
+@media screen and (max-width: 620px) {
+  .form__signin-question {
+    font-size: 12px;
+  }
+}
