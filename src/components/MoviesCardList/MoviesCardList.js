@@ -2,7 +2,7 @@ import MoviesCard from "../MoviesCard/MoviesCard";
 import "./MoviesCardList.css";
 import { useState } from "react";
 
-function MoviesCardList() {
+function MoviesCardList({cards}) {
   const [isSave, setIsSave] = useState(false);
 
   function changeState() {
@@ -12,22 +12,8 @@ function MoviesCardList() {
   return (
     <section className="movies-cards">
       <ul className="movies-cards__list">
-        <MoviesCard handleSaveClick={changeState} isSave={isSave} />
-        <MoviesCard />
-        <MoviesCard />
-        <MoviesCard />
-        <MoviesCard />
-        <MoviesCard />
-        <MoviesCard />
-        <MoviesCard />
-        <MoviesCard />
-        <MoviesCard />
-        <MoviesCard />
-        <MoviesCard />
-        <MoviesCard />
-        <MoviesCard />
-        <MoviesCard />
-        <MoviesCard />
+        {cards.map((card) => (<MoviesCard cardData={card} handleSaveClick={changeState} isSave={isSave} />))}
+       
       </ul>
       <button className="button-still">Ещё</button>
     </section>
