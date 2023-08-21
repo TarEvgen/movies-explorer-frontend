@@ -1,6 +1,14 @@
 import "./MoviesCard.css";
 
 function MoviesCard({ handleSaveClick, isSave, cardData }) {
+ 
+
+  const minutes = cardData.duration 
+  const hourDurationMovies =   Math.floor (minutes/60)
+  const minutesDurationMovies = minutes- hourDurationMovies*60
+  const timeConverter = hourDurationMovies >=1 ? `${hourDurationMovies}ч${minutesDurationMovies}м` : `${minutesDurationMovies}м`;
+
+
   return (
     <li className="card">
       <img
@@ -15,7 +23,7 @@ function MoviesCard({ handleSaveClick, isSave, cardData }) {
         onClick={handleSaveClick}
         type="button"
       ></button>
-      <p className="card__duration-movies">{`${Math.floor(cardData.duration/60)}`    }</p>
+      <p className="card__duration-movies">{timeConverter}</p>
     </li>
   );
 }
