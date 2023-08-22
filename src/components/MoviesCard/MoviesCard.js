@@ -16,7 +16,8 @@ function MoviesCard({ handleSaveClick, isSave, cardData }) {
         src={`https://api.nomoreparties.co${cardData.image.url}`}
         alt="Картинка фильма"
       />
-      <h2 className="card__title-movies">33 слова о дизайне</h2>
+      <h2 className="card__title-movies">{cardData.nameRU
+}</h2>
 
       <button
         className={`card__save-button ${isSave && "card__save-button_active"}`}

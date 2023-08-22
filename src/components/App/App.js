@@ -19,6 +19,8 @@ function App() {
   const [isOpenMenuNavigation, setOpenMenuNavigation] = useState(false);
   const [cards, setCard] = useState([]);
 
+  const [isIndex, setIndex] = useState([]);
+
   function openMenuNavigation() {
     setOpenMenuNavigation(true);
   }
@@ -27,17 +29,26 @@ function App() {
     setOpenMenuNavigation(false);
   }
 
-  useEffect(() => {
+
+  function SearchMovies (index) {
+
+    console.log(index, 'index долетело')
+
+  
   moviesApi.getAllCards()
 .then((res) => {
 
-  setCard(res)
 
+  setCard(res)
+  setIndex(index)
+ 
 
 })
 .catch((err) => alert(err));
 
-},[])
+
+
+}
 
   return (
     <div className="App">
@@ -56,7 +67,7 @@ function App() {
           path="/movies"
           element={
             <>
-              <Movies cards={ cards } />
+              <Movies cards={ cards } isIndex={isIndex} onSearchMovies={SearchMovies} />
               <Footer />
             </>
           }

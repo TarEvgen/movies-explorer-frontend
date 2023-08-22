@@ -1,13 +1,16 @@
 import SearchForm from "../SearchForm/SearchForm";
 import MoviesCardList from "../MoviesCardList/MoviesCardList";
 
-function Movies({ cards }) {
+function Movies({ cards, onSearchMovies, isIndex}) { 
+  
   return (
     <>
-      <SearchForm  />
-      <MoviesCardList cards={cards} />
+      <SearchForm onSearchMovies={onSearchMovies} />
+      <MoviesCardList cards={cards} isIndex={isIndex} />
     </>
   );
 }
+
+
 
 export default Movies;
