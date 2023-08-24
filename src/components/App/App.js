@@ -12,6 +12,7 @@ import SavedMovies from "../SavedMovies/SavedMovies";
 import Profile from "../Profile/Profile";
 import PageNotFound from "../PageNotFound/PageNotFound";
 import { moviesApi } from "../../utils/MoviesApi";
+import { getValue } from "@testing-library/user-event/dist/utils";
 
 //import ProtectedRoute from "./ProtectedRoute";
 
@@ -19,7 +20,28 @@ function App() {
   const [isOpenMenuNavigation, setOpenMenuNavigation] = useState(false);
   const [cards, setCard] = useState([]);
 
-  const [isIndex, setIndex] = useState([]);
+  const [c, setC] = useState([]);
+
+  const [text, setText] = useState('');
+
+useEffect(()=>{
+    if (localStorage.getItem('movies') ) {
+      const film = JSON.parse(localStorage.getItem('movies'))
+      const requestText = JSON.parse(localStorage.getItem('index'))
+     console.log(film, 'movies!!!!!')
+     console.log(requestText, 'requestText!!!!!')
+     setC(film)
+     setText(requestText)
+     
+    }else{
+      console.log('нет в хранилище')
+      
+    }
+   
+  },[])
+   
+  console.log(c, 'cccc')
+  
 
   function openMenuNavigation() {
     setOpenMenuNavigation(true);
@@ -29,6 +51,15 @@ function App() {
     setOpenMenuNavigation(false);
   }
 
+  const filterMovies = (res, index) => {
+
+
+   return res.filter(({nameRU}) =>nameRU.toLowerCase().includes(index.toLowerCase()))
+
+  }
+  
+  
+  
 
   function SearchMovies (index) {
 
@@ -38,13 +69,39 @@ function App() {
   moviesApi.getAllCards()
 .then((res) => {
 
-
-  setCard(res)
-  setIndex(index)
  
+  
+
+  
+   
+const movies = filterMovies(res, index)
+
+
+  
+
+
+
+  setCard(movies)
+  
+  
+  localStorage.setItem('movies', JSON.stringify(movies))
+  localStorage.setItem('index', JSON.stringify(index))
+ 
+ 
+  
 
 })
 .catch((err) => alert(err));
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -67,7 +124,7 @@ function App() {
           path="/movies"
           element={
             <>
-              <Movies cards={ cards } isIndex={isIndex} onSearchMovies={SearchMovies} />
+              <Movies cards={ cards } c={c}  onSearchMovies={SearchMovies} text={text} />
               <Footer />
             </>
           }

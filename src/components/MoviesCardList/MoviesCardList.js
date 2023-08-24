@@ -2,7 +2,7 @@ import MoviesCard from "../MoviesCard/MoviesCard";
 import "./MoviesCardList.css";
 import { useState } from "react";
 
-function MoviesCardList({cards, isIndex}) {
+function MoviesCardList({cards, c}) {
   const [isSave, setIsSave] = useState(false);
 
   function changeState() {
@@ -13,13 +13,18 @@ function MoviesCardList({cards, isIndex}) {
   console.log(cards, 'isIndex')
   console.log(cards.map((card) =>(card.nameRU.includes(isIndex)))  )
 */
-  const v = cards.find({isIndex})
+ //const v = cards.find({isIndex})
 
   
 
 
   //console.log(v
-   // )
+   // )z
+
+
+console.log(c, 'c!')
+console.log(cards.length, 'cards!')
+
 
   return (
     <section className="movies-cards">
@@ -27,12 +32,14 @@ function MoviesCardList({cards, isIndex}) {
         {
 
       
-
-
-
-        cards.map((card) => (<MoviesCard cardData={card}  handleSaveClick={changeState} isSave={isSave}  />))
        
+     cards.length === 0 ? 
+ 
+     c.map((card) => (<MoviesCard cardData={card}  handleSaveClick={changeState} isSave={isSave}  />))
+         : 
         
+        
+        cards.map((card) => (<MoviesCard cardData={card}   />))
         
         }
        

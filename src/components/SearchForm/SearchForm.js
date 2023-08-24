@@ -3,12 +3,15 @@ import FilterCheckbox from "../FilterCheckbox/FilterCheckbox";
 import { useState } from "react";
 
 
-function SearchForm({onSearchMovies}) {
+function SearchForm({onSearchMovies, text}) {
   const [isIndex, setIndex] = useState("");
 
 
 
   function handleSearchIndex(evt) {
+
+    localStorage.removeItem('index') 
+
     setIndex(evt.target.value);
   }
 
@@ -32,6 +35,7 @@ function SearchForm({onSearchMovies}) {
           placeholder="Фильм"
           required
           onChange={handleSearchIndex}
+          value={isIndex  }
         ></input>
         <button className="search-form__button" type="submit"></button>
       </form>
