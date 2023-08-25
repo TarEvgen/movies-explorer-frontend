@@ -22,7 +22,7 @@ function MoviesCardList({cards, c}) {
    // )z
 
 
-console.log(c, 'c!')
+
 console.log(cards.length, 'cards!')
 
 
@@ -31,16 +31,9 @@ console.log(cards.length, 'cards!')
       <ul className="movies-cards__list">
         {
 
-      
+cards.map((card) => (<MoviesCard cardData={card}  handleSaveClick={changeState} isSave={isSave}   />))
        
-     cards.length === 0 ? 
- 
-     c.map((card) => (<MoviesCard cardData={card}  handleSaveClick={changeState} isSave={isSave}  />))
-         : 
-        
-        
-        cards.map((card) => (<MoviesCard cardData={card}   />))
-        
+   
         }
        
       </ul>

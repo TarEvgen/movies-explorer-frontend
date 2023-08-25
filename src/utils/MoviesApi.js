@@ -4,7 +4,7 @@ class MoviesApi {
       this._headers = config.headers;
     }
   
-    getAllCards() {
+    getAllMovies() {
       return fetch(`${this._url}`, {
         method: "GET",
         headers: this._headers,

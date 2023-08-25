@@ -1,6 +1,6 @@
 import "./App.css";
-import { Routes, Route, } from "react-router-dom";
-import { useState,  useEffect } from "react";
+import { Routes, Route } from "react-router-dom";
+import { useState, useEffect } from "react";
 import Header from "../Header/Header";
 import Register from "../Register/Register";
 import Login from "../Login/Login";
@@ -17,31 +17,47 @@ import { getValue } from "@testing-library/user-event/dist/utils";
 //import ProtectedRoute from "./ProtectedRoute";
 
 function App() {
+  let moviesLocalStorage = JSON.parse(localStorage.getItem("moviesAll"));
+  let valueInput = JSON.parse(localStorage.getItem("valueInput"));
+
+  console.log(moviesLocalStorage)
+
+
+  const [moviesAll, setMoviesAll] = useState(moviesLocalStorage || []);
+
+  console.log(moviesAll, 'moviesAll')
+
+  const [searchString, setSearchString] = useState([]);
+
+
+
   const [isOpenMenuNavigation, setOpenMenuNavigation] = useState(false);
-  const [cards, setCard] = useState([]);
 
-  const [c, setC] = useState([]);
-
-  const [text, setText] = useState('');
-
-useEffect(()=>{
-    if (localStorage.getItem('movies') ) {
-      const film = JSON.parse(localStorage.getItem('movies'))
-      const requestText = JSON.parse(localStorage.getItem('index'))
-     console.log(film, 'movies!!!!!')
-     console.log(requestText, 'requestText!!!!!')
-     setC(film)
-     setText(requestText)
-     
-    }else{
-      console.log('нет в хранилище')
-      
-    }
-   
-  },[])
-   
-  console.log(c, 'cccc')
   
+  
+  ///////////
+
+  useEffect(() => {
+    if (moviesAll.length === 0 ){
+    moviesApi
+      .getAllMovies()
+      .then((dataMovies) => {
+        localStorage.setItem("moviesAll", JSON.stringify(dataMovies));
+        setMoviesAll(dataMovies)
+        
+      })
+      .catch((err) => alert(err));
+    }
+  }, []);
+
+/*
+  function search (evt) {
+    searchString()
+  }
+*/
+
+ 
+
 
   function openMenuNavigation() {
     setOpenMenuNavigation(true);
@@ -51,61 +67,53 @@ useEffect(()=>{
     setOpenMenuNavigation(false);
   }
 
-  const filterMovies = (res, index) => {
-
-
-   return res.filter(({nameRU}) =>nameRU.toLowerCase().includes(index.toLowerCase()))
-
-  }
-  
-  
-  
-
-  function SearchMovies (index) {
-
-    console.log(index, 'index долетело')
-
-  
-  moviesApi.getAllCards()
-.then((res) => {
-
- 
-  
-
-  
+  const filterMovies = (index ) => {
    
-const movies = filterMovies(res, index)
+   console.log(index,"сработал фильтр" )
+
+
+
+
+  return moviesAll.filter(({ nameRU }) =>
+    nameRU.toLowerCase().includes(index.toLowerCase()))
+
+
+  /*  if (JSON.parse(localStorage.getItem("checked"))) {*
+      console.log("чекбокс тру");
+      const moviesF = moviesLocalStorage.filter(({ duration }) => duration < 60);
+      return moviesF.filter(({ nameRU }) =>
+        nameRU.toLowerCase().includes(index.toLowerCase())
+      );
+    } else {
+      console.log("чекбокс лож");
+      return moviesLocalStorage.filter(({ nameRU }) =>
+        nameRU.toLowerCase().includes(index.toLowerCase())
+      );
+    }
+*/
+
+  };
 
 
   
+  function SearchMovies(index) {
+    console.log(index, "index долетело");
+    localStorage.setItem("valueInput", JSON.stringify(index));
+    const g = filterMovies(index)
+    console.log(g, 'g')
+    setSearchString(g );
 
+    localStorage.setItem("moviesFilter", JSON.stringify(g ));
+  }
 
+  if (valueInput.length !==0) {
 
-  setCard(movies)
+    console.log(valueInput, 'valeo')
+   
   
   
-  localStorage.setItem('movies', JSON.stringify(movies))
-  localStorage.setItem('index', JSON.stringify(index))
- 
- 
-  
+  }
 
-})
-.catch((err) => alert(err));
-
-
-
-
-
-
-
-
-
-
-
-
-
-}
 
   return (
     <div className="App">
@@ -124,7 +132,12 @@ const movies = filterMovies(res, index)
           path="/movies"
           element={
             <>
-              <Movies cards={ cards } c={c}  onSearchMovies={SearchMovies} text={text} />
+              <Movies
+                cards={searchString}
+                onSearchMovies={SearchMovies}
+                
+                
+              />
               <Footer />
             </>
           }
