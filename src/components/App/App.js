@@ -17,13 +17,13 @@ import { getValue } from "@testing-library/user-event/dist/utils";
 //import ProtectedRoute from "./ProtectedRoute";
 
 function App() {
-  let moviesLocalStorage = JSON.parse(localStorage.getItem("moviesAll"));
-  let valueInput = JSON.parse(localStorage.getItem("valueInput"));
+  //let moviesLocalStorage = JSON.parse(localStorage.getItem("moviesAll"));
+  //let valueInput = JSON.parse(localStorage.getItem("valueInput"));
 
-  console.log(moviesLocalStorage)
+  console.log(JSON.parse(localStorage.getItem("moviesAll")))
 
 
-  const [moviesAll, setMoviesAll] = useState(moviesLocalStorage || []);
+  const [moviesAll, setMoviesAll] = useState(JSON.parse(localStorage.getItem("moviesAll")) || []);
 
   console.log(moviesAll, 'moviesAll')
 
@@ -34,6 +34,15 @@ function App() {
   const [isOpenMenuNavigation, setOpenMenuNavigation] = useState(false);
 
   
+
+ 
+/*
+   SearchMovies(localStorage.getItem("valueInput"))
+  
+  
+   console.log(localStorage.getItem("valueInput"), 'JSON.parse(localStorage.getItem("valueInput"))')
+*/
+
   
   ///////////
 
@@ -72,12 +81,19 @@ function App() {
    console.log(index,"сработал фильтр" )
 
 
+console.log(index.length, 'index.length')
 
+if(index.length===0) {
+  console.log(index.length, 'стоп!!!')
+
+  return([])
+
+}else{
 
   return moviesAll.filter(({ nameRU }) =>
     nameRU.toLowerCase().includes(index.toLowerCase()))
 
-
+  }
   /*  if (JSON.parse(localStorage.getItem("checked"))) {*
       console.log("чекбокс тру");
       const moviesF = moviesLocalStorage.filter(({ duration }) => duration < 60);
@@ -98,7 +114,7 @@ function App() {
   
   function SearchMovies(index) {
     console.log(index, "index долетело");
-    localStorage.setItem("valueInput", JSON.stringify(index));
+    localStorage.setItem("valueInput", (index));
     const g = filterMovies(index)
     console.log(g, 'g')
     setSearchString(g );
@@ -106,13 +122,7 @@ function App() {
     localStorage.setItem("moviesFilter", JSON.stringify(g ));
   }
 
-  if (valueInput.length !==0) {
-
-    console.log(valueInput, 'valeo')
-   
   
-  
-  }
 
 
   return (

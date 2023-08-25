@@ -1,15 +1,12 @@
 import "./SearchForm.css";
 import FilterCheckbox from "../FilterCheckbox/FilterCheckbox";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 function SearchForm({ onSearchMovies}) {
   const [isIndex, setIndex] = useState(
-    JSON.parse(localStorage.getItem("valueInput")) || ""
+    localStorage.getItem("valueInput") || ""
   );
 
-  
-
-  
 
   function handleSearchIndex(evt) {
    const valueInput = evt.target.value;
@@ -17,9 +14,14 @@ function SearchForm({ onSearchMovies}) {
    
   }
 
+  useEffect(()=>{
+    onSearchMovies(isIndex);
+  },[])
+  
+
   function handleSubmit(e) {
     e.preventDefault();
-    onSearchMovies(isIndex);
+   onSearchMovies(isIndex);
   }
 
   return (
