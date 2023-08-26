@@ -1,20 +1,21 @@
 import "./FilterCheckbox.css";
 import { useState } from "react";
 
-function FilterCheckbox() {
+function FilterCheckbox({shortFilmFilter}) {
+  
+
   const [checked, setChecked] = useState(JSON.parse(localStorage.getItem('checked')) || false);
 
 
-
-  
-
-
-
-
-  function onChange() {
+  function onChanged() {
     setChecked(!checked);
     localStorage.setItem('checked', JSON.stringify(!checked))
+    shortFilmFilter()
+
   }
+
+
+
 
   return (
     <>
@@ -25,7 +26,7 @@ function FilterCheckbox() {
             id="checkbox-short-films"
             type="checkbox"
             checked={checked}
-            onChange={onChange}
+            onChange={onChanged}
           ></input>
           <span className="checkbox__name">Короткометражки</span>
         </label>

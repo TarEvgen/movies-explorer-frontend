@@ -17,81 +17,114 @@ import { getValue } from "@testing-library/user-event/dist/utils";
 //import ProtectedRoute from "./ProtectedRoute";
 
 function App() {
-  //let moviesLocalStorage = JSON.parse(localStorage.getItem("moviesAll"));
-  //let valueInput = JSON.parse(localStorage.getItem("valueInput"));
-
-  console.log(JSON.parse(localStorage.getItem("moviesAll")))
-
-
-  const [moviesAll, setMoviesAll] = useState(JSON.parse(localStorage.getItem("moviesAll")) || []);
-
-  console.log(moviesAll, 'moviesAll')
-
-  const [searchString, setSearchString] = useState([]);
-
-
-
   const [isOpenMenuNavigation, setOpenMenuNavigation] = useState(false);
+ 
+ 
+  const [moviesAll, setMoviesAll] = useState(JSON.parse(localStorage.getItem("moviesAll")) || []);
+  const [filteredMovies, setFilteredMovies] = useState([]);
 
   
 
  
-/*
-   SearchMovies(localStorage.getItem("valueInput"))
   
-  
-   console.log(localStorage.getItem("valueInput"), 'JSON.parse(localStorage.getItem("valueInput"))')
-*/
 
-  
-  ///////////
 
+
+//// получение списка фильмов с апи
   useEffect(() => {
     if (moviesAll.length === 0 ){
     moviesApi
       .getAllMovies()
       .then((dataMovies) => {
         localStorage.setItem("moviesAll", JSON.stringify(dataMovies));
-        setMoviesAll(dataMovies)
-        
+        setMoviesAll(dataMovies)  
       })
       .catch((err) => alert(err));
     }
   }, []);
 
-/*
-  function search (evt) {
-    searchString()
-  }
-*/
-
- 
-
-
+///// открытие бургер менб
   function openMenuNavigation() {
     setOpenMenuNavigation(true);
   }
 
+//// закрытие бургер меню
   function closeMenuNavigation() {
     setOpenMenuNavigation(false);
   }
 
-  const filterMovies = (index ) => {
+
+  const checkboxStatus =JSON.parse(localStorage.getItem('checked')) 
+ 
+  const [checkboxStatusа, setcheckboxStatus] = useState(checkboxStatus);
+  
+
+  if (checkboxStatusа) {
+    console.log('переключатель включен')
+  } else {
+    console.log('переключатель выыыключен')
+  }
+
+
+
+
+
+
+//// функция фильтраци по строке поиска и чекбоксу
+
+const filterMovies = (searchBar) => {
+
+
+
    
-   console.log(index,"сработал фильтр" )
+  
 
-
-console.log(index.length, 'index.length')
-
-if(index.length===0) {
-  console.log(index.length, 'стоп!!!')
+if(searchBar.length===0) {
+  console.log(searchBar.length, 'стоп!!!')
 
   return([])
 
 }else{
 
-  return moviesAll.filter(({ nameRU }) =>
-    nameRU.toLowerCase().includes(index.toLowerCase()))
+const g =JSON.parse(localStorage.getItem('checked'))
+
+  /*
+if(JSON.parse(localStorage.getItem('checked'))){
+  console.log('h!!!!!!!!!!!!')
+
+}else{
+  console.log('&&&&&&&&')
+}
+ */
+
+if (g) {
+  const h = moviesAll.filter(({ nameRU, nameEN
+  }) =>
+
+    nameRU.toLowerCase().includes(searchBar.toLowerCase())|| nameEN
+    .toLowerCase().includes(searchBar.toLowerCase()))
+    
+    console.log(h, '111111111111111111111')
+    console.log(moviesAll, '111111111111111111111')
+
+    return h.filter(({ duration }) => duration < 40);
+
+}else{
+
+
+ return moviesAll.filter(({ nameRU, nameEN
+ }) =>
+
+ 
+
+  nameRU.toLowerCase().includes(searchBar.toLowerCase()) || nameEN
+  .toLowerCase().includes(searchBar.toLowerCase()))
+
+}
+ 
+
+
+   
 
   }
   /*  if (JSON.parse(localStorage.getItem("checked"))) {*
@@ -111,18 +144,12 @@ if(index.length===0) {
   };
 
 
-  
-  function SearchMovies(index) {
-    console.log(index, "index долетело");
-    localStorage.setItem("valueInput", (index));
-    const g = filterMovies(index)
-    console.log(g, 'g')
-    setSearchString(g );
-
-    localStorage.setItem("moviesFilter", JSON.stringify(g ));
+//// функция поиска фильмов
+  function SearchMovies(searchBar) {
+    localStorage.setItem("valueInput", (searchBar));
+    const newMovies = filterMovies(searchBar)
+    setFilteredMovies(newMovies);
   }
-
-  
 
 
   return (
@@ -143,7 +170,7 @@ if(index.length===0) {
           element={
             <>
               <Movies
-                cards={searchString}
+                cards={filteredMovies}
                 onSearchMovies={SearchMovies}
                 
                 

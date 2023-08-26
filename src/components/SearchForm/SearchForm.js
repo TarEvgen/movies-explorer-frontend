@@ -2,7 +2,7 @@ import "./SearchForm.css";
 import FilterCheckbox from "../FilterCheckbox/FilterCheckbox";
 import { useEffect, useState } from "react";
 
-function SearchForm({ onSearchMovies}) {
+function SearchForm({ onSearchMovies }) {
   const [isIndex, setIndex] = useState(
     localStorage.getItem("valueInput") || ""
   );
@@ -14,8 +14,19 @@ function SearchForm({ onSearchMovies}) {
    
   }
 
+
+ 
+  function shortFilmFilter() {
+    console.log('сработал чекбокс')
+    onSearchMovies(isIndex);
+  }
+
+
+
+
   useEffect(()=>{
     onSearchMovies(isIndex);
+    
   },[])
   
 
@@ -37,7 +48,7 @@ function SearchForm({ onSearchMovies}) {
         <button className="search-form__button" type="submit"></button>
       </form>
       <div className="search-form__checkbox">
-        <FilterCheckbox />
+        <FilterCheckbox shortFilmFilter={shortFilmFilter} />
       </div>
       <div className="line"></div>
     </section>
