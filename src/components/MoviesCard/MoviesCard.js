@@ -11,11 +11,11 @@ function MoviesCard({ handleSaveClick, isSave, cardData }) {
 
   return (
     <li className="card">
-      <img
+      <a href={cardData.trailerLink} target="_blank" rel="noreferrer"><img
         className="card__img"
         src={`https://api.nomoreparties.co${cardData.image.url}`}
         alt="Картинка фильма"
-      />
+      /></a>
       <h2 className="card__title-movies">{cardData.nameRU
 }</h2>
 
