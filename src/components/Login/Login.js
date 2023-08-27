@@ -1,23 +1,36 @@
 import { Link } from "react-router-dom";
 import "./Login.css";
 
-function Login() {
+import {useFormWithValidation} from "../../Hook/useFormWithValidation"
+
+function Login({ handleLogin }) {
+
+  const { values, handleChange, errors, isValid, resetForm } = useFormWithValidation()
+
+  console.log(values, 'values')
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    
+    handleLogin(values);
+  };
+
   return (
     <>
-      <form className="form">
+      <form className="form" onSubmit={handleSubmit}>
         <Link className="logo logo_form" to="/"></Link>
         <h2 className="form__name">Рады видеть!</h2>
         <label className="form__input-name">
           E-mail
-          <input className="form__input" id="e-mail" required/>
-          <span className="form__imput-error"></span>
+          <input type="email" className="form__input" id="email" required name="email" onChange={handleChange}/>
+          <span className="form__imput-error">{errors['email']}</span>
         </label>
         <label className="form__input-name">
           Пароль
-          <input type="password" className="form__input" id="password" required/>
-          <span className="form__imput-error"></span>
+          <input type="password" className="form__input" id="password" required name="password" onChange={handleChange}/>
+          <span className="form__imput-error">{errors['password']}</span>
         </label>
-        <button className="form__button form__button_login" type="submit">
+        <button className="form__button form__button_login" type="submit" disabled={!isValid}>
           Войти
         </button>
         <div className="form__signin">

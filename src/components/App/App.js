@@ -1,5 +1,5 @@
 import "./App.css";
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 
 import Header from "../Header/Header";
@@ -15,11 +15,14 @@ import PageNotFound from "../PageNotFound/PageNotFound";
 import { moviesApi } from "../../utils/MoviesApi";
 import { getValue } from "@testing-library/user-event/dist/utils";
 
+import * as MainApi from "../../utils/MainApi";
+
 
 
 //import ProtectedRoute from "./ProtectedRoute";
 
 function App() {
+  const navigate = useNavigate();
   const [isOpenMenuNavigation, setOpenMenuNavigation] = useState(false);
 
   const [moviesAll, setMoviesAll] = useState(
@@ -54,6 +57,46 @@ function App() {
     setOpenMenuNavigation(false);
   }
 
+  ///////////////////////////////// регистрация
+
+  const handelRegister = ({name ,email, password}) => {
+    console.log({name ,email, password}, 'hkhkh!!!!!')
+    return MainApi
+      .register(name, email, password)
+      .then((res) => {
+       // setIsSuccess(true);
+       // setIsInfoTooltipOpen(true);
+        navigate("/movies");
+      })
+      .catch(() => {
+        //setIsInfoTooltipOpen(true);
+        //setIsSuccess(false);
+      });
+  };
+
+
+
+  ///////////////////////////////////
+
+  ///////////////////// авторизация
+  const handleLogin = ({email, password}) => {
+    console.log(email, password, 'email, password')
+    MainApi
+      .authorize(email, password)
+      .then((res) => {
+       // setUserEmail(email);
+       console.log(res, 'res')
+        localStorage.setItem("jwt", res.token);
+       // setLoggedIn(true);
+        navigate("/movies");
+      })
+      .catch(() => {
+       // setIsSuccess(false);
+       // setIsInfoTooltipOpen(true);
+      });
+  };
+
+////////////////////////////
   
 
 
@@ -133,8 +176,8 @@ function App() {
             </>
           }
         />
-        <Route path="/sign-up" element={<Register />} />
-        <Route path="/sign-in" element={<Login />} />
+        <Route path="/sign-up" element={<Register handelRegister={handelRegister} />} />
+        <Route path="/sign-in" element={<Login handleLogin={handleLogin} />} />
         <Route path="*" element={<PageNotFound />} />
       </Routes>
       <Navigation
