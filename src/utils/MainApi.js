@@ -18,12 +18,24 @@ export const authorize = (email, password) => {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
+        
       },
       body: JSON.stringify({ password: password, email: email }),
     }).then((res) => {
       return getResponseData(res);
     });
   };
+
+
+  export const loadDataUser = () => {
+    return fetch(`${BASE_URL}/users/me`, {
+      method: "GET",
+      headers: { 'content-type': 'application/json',
+       Authorization: `Bearer ${localStorage.getItem('jwt')}` },
+    }).then((res) => {
+      return getResponseData(res);
+    });
+  }
 
 
 function getResponseData(res) {

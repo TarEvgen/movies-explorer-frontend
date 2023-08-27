@@ -13,6 +13,7 @@ import SavedMovies from "../SavedMovies/SavedMovies";
 import Profile from "../Profile/Profile";
 import PageNotFound from "../PageNotFound/PageNotFound";
 import { moviesApi } from "../../utils/MoviesApi";
+import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 import { getValue } from "@testing-library/user-event/dist/utils";
 
 import * as MainApi from "../../utils/MainApi";
@@ -25,6 +26,10 @@ function App() {
   const navigate = useNavigate();
   const [isOpenMenuNavigation, setOpenMenuNavigation] = useState(false);
 
+  const [currentUser, setCurrentUser] = useState({});
+
+  const [isLoggedIn, setLoggedIn] = useState(false); /////////////проверка логина, типа если вошел то тру)))
+
   const [moviesAll, setMoviesAll] = useState(
     JSON.parse(localStorage.getItem("moviesAll")) || []
   );
@@ -35,7 +40,7 @@ function App() {
 
 
   //// получение списка фильмов с апи
-  useEffect(() => {
+ /* useEffect(() => {
     if (moviesAll.length === 0) {
       moviesApi
         .getAllMovies()
@@ -46,6 +51,37 @@ function App() {
         .catch((err) => alert(err));
     }
   }, []);
+*/
+
+
+
+
+  useEffect(() => {
+    console.log("сработал юзэффект")
+    console.log(isLoggedIn, "isLoggedIn")
+    if (isLoggedIn) {
+      console.log(isLoggedIn, "Внутри условия")
+      Promise.all([moviesApi
+        .getAllMovies(), MainApi.loadDataUser()])
+        .then(([dataMovies, dataUser]) => {
+          console.log(dataMovies, 'dataMovies', dataUser, 'dataUser')
+          localStorage.setItem("moviesAll", JSON.stringify(dataMovies));
+          setMoviesAll(dataMovies);
+          setCurrentUser(dataUser);
+        })
+        .catch((err) => alert(err));
+        console.log("ошибка")
+    }
+  }, [isLoggedIn]);
+
+
+
+
+
+
+
+
+
 
   ///// открытие бургер менб
   function openMenuNavigation() {
@@ -87,7 +123,7 @@ function App() {
        // setUserEmail(email);
        console.log(res, 'res')
         localStorage.setItem("jwt", res.token);
-       // setLoggedIn(true);
+        setLoggedIn(true);
         navigate("/movies");
       })
       .catch(() => {
@@ -138,6 +174,7 @@ function App() {
   }
 
   return (
+    <CurrentUserContext.Provider value={currentUser}>
     <div className="App">
       <Header openMenu={openMenuNavigation} />
       <Routes>
@@ -185,6 +222,7 @@ function App() {
         closeMenu={closeMenuNavigation}
       />
     </div>
+     </CurrentUserContext.Provider>
   );
 }
 
