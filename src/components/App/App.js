@@ -14,7 +14,7 @@ import Profile from "../Profile/Profile";
 import PageNotFound from "../PageNotFound/PageNotFound";
 import { moviesApi } from "../../utils/MoviesApi";
 import { CurrentUserContext } from "../../contexts/CurrentUserContext";
-import { getValue } from "@testing-library/user-event/dist/utils";
+//import { getValue } from "@testing-library/user-event/dist/utils";
 
 import * as MainApi from "../../utils/MainApi";
 
@@ -34,6 +34,8 @@ function App() {
     JSON.parse(localStorage.getItem("moviesAll")) || []
   );
   const [filteredMovies, setFilteredMovies] = useState([]);
+
+  const [isServerRes, setServerRes ] = useState("");
 
   ////////////////////////// Кнопка еще
  
@@ -57,7 +59,7 @@ function App() {
 
 
   useEffect(() => {
-    console.log("сработал юзэффект")
+    console.log("сработал юзэффект где логин проверяется")
     console.log(isLoggedIn, "isLoggedIn")
     if (isLoggedIn) {
       console.log(isLoggedIn, "Внутри условия")
@@ -75,6 +77,32 @@ function App() {
   }, [isLoggedIn]);
 
 
+  const checkToken = () => {
+    const jwt = localStorage.getItem('jwt');
+    if (jwt) {
+      MainApi
+        .getCheckToken(jwt)
+        .then((res) => {
+          if (res) {
+            console.log(res, "рес при проверки токена")
+            //setLoggedIn(true);
+            setCurrentUser(res)
+           // setUserEmail(res.email);
+            //navigate('/');
+          } else {
+          // setLoggedIn(false);
+          }
+        })
+        .catch((err) => alert(err));
+    }
+  };
+
+
+
+  useEffect(() => {
+    checkToken();
+// eslint-disable-next-line react-hooks/exhaustive-deps
+  },[])
 
 
 
@@ -110,6 +138,18 @@ function App() {
       });
   };
 
+/////выход из акаунта
+  const outProfile = (e) =>
+ {
+  console.log('нажал выйти')
+  localStorage.removeItem('jwt')
+  localStorage.removeItem('moviesAll')
+  localStorage.removeItem('checked')
+  localStorage.removeItem('valueInput')
+  navigate("/");
+ }
+
+
 
 
   ///////////////////////////////////
@@ -133,7 +173,21 @@ function App() {
   };
 
 ////////////////////////////
-  
+  /////////////// обновление информации о пользователи
+  function handleUpdateUser(dataUser) {
+    MainApi
+      .editProfile(dataUser)
+      .then((res) => {
+        setCurrentUser(res.data);
+        setServerRes({message: "данные обновлены успешно"})
+       console.log(res, 'res')
+        //closeAllPopups();
+      })
+      .catch((err) => setServerRes({error: "При обновлении профиля произошла ошибка."}));
+  }
+
+
+  //////////////////////////////
 
 
 
@@ -164,7 +218,7 @@ function App() {
   };
 
  
-
+console.log(currentUser,'currentUser')
   //// функция поиска фильмов
   function SearchMovies(searchBar) {
     localStorage.setItem("valueInput", searchBar);
@@ -200,7 +254,7 @@ function App() {
           path="/saved-movies"
           element={
             <>
-              <SavedMovies />
+              <SavedMovies cards={filteredMovies} onSearchMovies={SearchMovies}/>
               <Footer />
             </>
           }
@@ -209,7 +263,7 @@ function App() {
           path="/profile"
           element={
             <>
-              <Profile />
+              <Profile handleUpdateUser={handleUpdateUser} isServerRes={isServerRes} outProfile={outProfile}/>
             </>
           }
         />

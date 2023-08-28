@@ -1,33 +1,148 @@
+import React from 'react';
 import "./Profile.css";
+import { CurrentUserContext } from "../../contexts/CurrentUserContext";
+import {useFormWithValidation} from "../../Hook/useFormWithValidation"
+import {  useState, useEffect } from "react";
 
-function Profile() {
+function Profile({handleUpdateUser, isServerRes, outProfile}) {
+
+  const { values, handleChange, errors, isValid, resetForm } = useFormWithValidation()
+
+  const currentUser = React.useContext(CurrentUserContext);
+  console.log(currentUser)
+ 
+  
+
+  const [isUserName, setUserName] = useState(currentUser.name);
+  const [isUserEmail, UserEmail] = useState(currentUser.email);
+  
+
+
+  //const [isEditProfile, setEditProfile] = useState(false);
+
+  useEffect(() => {
+    
+    setUserName(currentUser.name)
+    UserEmail(currentUser.email)
+    
+  }, [currentUser])
+
+  
+  
+  useEffect(() => {
+    
+    
+      setUserName(values.name)
+      
+    
+    UserEmail(values.email)
+ 
+    
+  }, [values])
+
+
+ 
+
+  //isEditProfile ? values.name : currentUser.name
+
+
+  console.log(currentUser.name, 'isUserName')
+
+
+  /////// значение ввода в поля  values
+  ////// значения по умолчанию в current User
+
+  //// полля ввода вывода
+
+  //// кнопка редактирования
+
+  //// кнопка сохранить
+/*
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const name = values.name || currentUser.name
+    const email = values.email || currentUser.email
+
+
+    handleUpdateUser({name, email})
+
+
+   
+  };
+
+  */
+////делает кнопку активной и не активной
+
+
+
+
+const handleSubmit = (e) => {
+  e.preventDefault();
+ 
+  //setUserName(values.name)
+  
+
+ /* if(isEditProfile) {
+
+
+ 
+  
+
+  
+}
+*/
+const name = values.name || currentUser.name
+const email = values.email || currentUser.email
+handleUpdateUser({name, email})
+//setEditProfile(!isEditProfile)
+resetForm()
+
+
+}
+
+
+
+
+
   return (
-    <form className="form form_profile">
-      <h2 className="form__name form__name_profile">Привет, Виталий!</h2>
+    <form className="form form_profile" onSubmit={handleSubmit}>
+      <h2 className="form__name form__name_profile">{`Привет, ${currentUser.name}!`}</h2>
       <label className="form__edit-name">
         Имя
-        <input className="form__edit-input" id="name" placeholder="Виталий" />
+        <input className="form__edit-input" id="name" name='name' placeholder="Имя"  value={isUserName} onChange={handleChange} required/>
+        
       </label>
+      <span className="form__edit-error">{errors['name']}</span>
       <div className="line line_profile"></div>
       <label className="form__edit-name">
         <nobr>E-mail</nobr>
         <input
           className="form__edit-input"
-          id="E-mail"
-          placeholder="pochta@yandex.ru"
+          id="email" name='email'
+          placeholder="E-mail"
+          value={isUserEmail}
+          required
+          type='email'
+          onChange={handleChange}
+          
         />
       </label>
-      <button className="button-edit" type="submit">
-        Редактировать
+      <span className="form__edit-error">{errors['email']}</span>
+      <span className={`form__edit-message ${isServerRes.error ? "form__edit-message_error" : "form__edit-message_success" }`}>{isServerRes.error ? isServerRes.error : isServerRes.message}</span>
+      <button className="button-edit"  type="submit" disabled={!isValid}>
+       Редактировать
       </button>
       <button
         className="button-edit button-edit_out"
-        type="submit"
+        type="button" onClick={outProfile}
       >
         Выйти из аккаунта
       </button>
+      
     </form>
   );
 }
 
 export default Profile;
+
+/*${!isValid? "button-edit_save_invalid" : ""}*/

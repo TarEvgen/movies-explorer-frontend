@@ -38,6 +38,37 @@ export const authorize = (email, password) => {
   }
 
 
+  export const editProfile = (inputData) => {
+    console.log(inputData, 'inputData')
+    return fetch(`${BASE_URL}/users/me`, {
+      method: 'PATCH',
+      headers:  { 'content-type': 'application/json',
+      Authorization: `Bearer ${localStorage.getItem('jwt')}` },
+      body: JSON.stringify({
+        name: inputData.name,
+        email: inputData.email,
+      }),
+    }).then((res) => {
+      return getResponseData(res);
+    });
+  }
+
+
+  export const getCheckToken = (token) => {
+    return fetch(`${BASE_URL}/users/me`, {
+      method: 'GET',
+         headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`,
+        
+      },
+      
+    }).then((res) => {
+      return getResponseData(res);
+    });
+  };
+
+
 function getResponseData(res) {
     return res.ok ? res.json() : Promise.reject("Произошла ошибка");
   }

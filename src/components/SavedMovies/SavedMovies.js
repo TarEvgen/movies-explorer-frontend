@@ -1,11 +1,11 @@
 import SearchForm from "../SearchForm/SearchForm";
 import MoviesCardList from "../MoviesCardList/MoviesCardList";
 
-function SavedMovies() {
+function SavedMovies({ cards, onSearchMovies,  text, status}) {
   return (
     <>
-      <SearchForm />
-      <MoviesCardList />
+      <SearchForm onSearchMovies={onSearchMovies} text={text} status={status} />
+      <MoviesCardList cards={cards}/>
     </>
   );
 }
