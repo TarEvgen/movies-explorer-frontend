@@ -150,6 +150,27 @@ function App() {
  }
 
 
+ ///////////////////////////////// сохранение фильмов
+
+ function handleCardSave(card) {
+  console.log(card, 'cardcardcardcardcardcardcardcardcard')
+  /*const isLiked = card.likes.some((i) => i === currentUser._id);
+  api
+    .changeLikeCardStatus(card._id, isLiked)
+    .then((newCard) => {
+      setCard((state) =>
+        state.map((c) => (c._id === card._id ? newCard : c))
+      );
+    })
+    .catch((err) => alert(err));*/
+}
+
+
+
+
+
+
+//////////////////////////////
 
 
   ///////////////////////////////////
@@ -245,7 +266,7 @@ console.log(currentUser,'currentUser')
           path="/movies"
           element={
             <>
-              <Movies cards={filteredMovies} onSearchMovies={SearchMovies} />
+              <Movies cards={filteredMovies} onSearchMovies={SearchMovies} onCardSave={handleCardSave} />
               <Footer />
             </>
           }

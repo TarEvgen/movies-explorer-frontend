@@ -14,7 +14,7 @@ const desctopInittalFilmCount = 16;
 const tabletInittalFilmCount = 8;
 const mobileInittalFilmCount = 5;
 
-function MoviesCardList({ cards }) {
+function MoviesCardList({ cards, onCardSave }) {
   const [isSave, setIsSave] = useState(false);
 
   ///// слушаем разрешения экрана
@@ -32,6 +32,9 @@ function MoviesCardList({ cards }) {
 
   const [visibleMoviesCount, setVisibleMoviesCount] =
     useState(initialCardCount); //////////количество видимых карточек
+
+
+   
 
   function changeState() {
     isSave ? setIsSave(false) : setIsSave(true);
@@ -58,8 +61,9 @@ function MoviesCardList({ cards }) {
         {cards?.slice(0, visibleMoviesCount).map((card) => (
           <MoviesCard
             cardData={card}
-            handleSaveClick={changeState}
-            isSave={isSave}
+            key={card.id}
+            //handleSaveClick={changeState}
+            onCardSave={onCardSave}
           />
         ))}
       </ul>
