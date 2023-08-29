@@ -1,6 +1,7 @@
 import "./App.css";
-import { Routes, Route, useNavigate } from "react-router-dom";
-import { useState, useEffect } from "react";
+import { useState, useEffect,   } from "react";
+import { Routes, Route, useNavigate, useLocation} from "react-router-dom";
+
 
 import Header from "../Header/Header";
 import Register from "../Register/Register";
@@ -24,11 +25,18 @@ import * as MainApi from "../../utils/MainApi";
 
 function App() {
   const navigate = useNavigate();
+  //const location = useLocation();
+ // console.log(location, 'history')
   const [isOpenMenuNavigation, setOpenMenuNavigation] = useState(false);
 
   const [currentUser, setCurrentUser] = useState({});
 
   const [isLoggedIn, setLoggedIn] = useState(false); /////////////проверка логина, типа если вошел то тру)))
+
+  const [isCardsMoviesSave, setCardsMoviesSave] = useState([]);/////////// Карточки которые сохранил пользователь
+
+
+  console.log(isCardsMoviesSave, 'isCardsMoviesSave просто в апи')
 
   const [moviesAll, setMoviesAll] = useState(
     JSON.parse(localStorage.getItem("moviesAll")) || []
@@ -59,17 +67,18 @@ function App() {
 
 
   useEffect(() => {
-    console.log("сработал юзэффект где логин проверяется")
-    console.log(isLoggedIn, "isLoggedIn")
+    
     if (isLoggedIn) {
-      console.log(isLoggedIn, "Внутри условия")
+      
       Promise.all([moviesApi
         .getAllMovies(), MainApi.loadDataUser()])
         .then(([dataMovies, dataUser]) => {
           console.log(dataMovies, 'dataMovies', dataUser, 'dataUser')
-          localStorage.setItem("moviesAll", JSON.stringify(dataMovies));
+          
           setMoviesAll(dataMovies);
           setCurrentUser(dataUser);
+          localStorage.setItem("moviesAll", JSON.stringify(dataMovies));
+
         })
         .catch((err) => alert(err));
         console.log("ошибка")
@@ -102,7 +111,7 @@ function App() {
   useEffect(() => {
     checkToken();
 // eslint-disable-next-line react-hooks/exhaustive-deps
-  },[])
+  },[isLoggedIn])
 
 
 
@@ -154,20 +163,39 @@ function App() {
 
  function handleCardSave(card) {
   console.log(card, 'cardcardcardcardcardcardcardcardcard')
-  /*const isLiked = card.likes.some((i) => i === currentUser._id);
-  api
-    .changeLikeCardStatus(card._id, isLiked)
+  console.log(currentUser._id
+    , 'cardcardcardcardcardcardcardcardcard')
+
+const userId = currentUser._id
+
+  /*const isLiked = card.likes.some((i) => i === currentUser._id);*/
+  MainApi
+    .saveCard(card, userId)
     .then((newCard) => {
-      setCard((state) =>
+      
+      console.log(newCard, 'новая карта')
+      /*setCard((state) =>
         state.map((c) => (c._id === card._id ? newCard : c))
-      );
+      );*/
     })
-    .catch((err) => alert(err));*/
+    .catch((err) => alert(err));
+}
+
+//////////////////// Вернуть все карточки
+function getCardSaveMovies () {
+MainApi.getSaveCardsMovies()
+.then((cardsMoviesSave) => {
+  
+  setCardsMoviesSave(cardsMoviesSave)
+  console.log(cardsMoviesSave, '!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!')
+})
 }
 
 
+useEffect(() => {
+  getCardSaveMovies();
 
-
+},[isLoggedIn, currentUser])
 
 
 //////////////////////////////
@@ -266,7 +294,7 @@ console.log(currentUser,'currentUser')
           path="/movies"
           element={
             <>
-              <Movies cards={filteredMovies} onSearchMovies={SearchMovies} onCardSave={handleCardSave} />
+              <Movies cards={filteredMovies}  onSearchMovies={SearchMovies} onCardSave={handleCardSave} isCardsMoviesSave={isCardsMoviesSave}/>
               <Footer />
             </>
           }
@@ -275,7 +303,7 @@ console.log(currentUser,'currentUser')
           path="/saved-movies"
           element={
             <>
-              <SavedMovies cards={filteredMovies} onSearchMovies={SearchMovies}/>
+              <SavedMovies  cards={filteredMovies} onSearchMovies={SearchMovies} isCardsMoviesSave={isCardsMoviesSave} />
               <Footer />
             </>
           }

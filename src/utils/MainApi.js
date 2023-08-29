@@ -69,6 +69,85 @@ export const authorize = (email, password) => {
   };
 
 
+  export const saveCard = (card, userId) => {
+
+    console.log(userId, 'JSON.stringify(card)')
+    console.log({
+      country: card.country,
+      director: card.director,
+      duration: card.duration,
+      year: card.year,
+      description: card.description,
+      image: card.image.url,
+      trailerLink: card.trailerLink,
+      thumbnail: card.image.formats.thumbnail.url,
+      movieId: card.id,
+      nameRU: card.nameRU,
+          nameEN: card.nameEN,
+       //owner: userId,
+      
+
+
+
+    
+    
+    }, 'JSON.stringify(card)')
+    //console.log(JSON.parse(card), 'JSON.stringify(card)')
+    
+   // if (!isLiked) {
+      return fetch(`${BASE_URL}/movies`, {
+        method: 'POST',
+        headers:  { 'content-type': 'application/json',
+        Authorization: `Bearer ${localStorage.getItem('jwt')}` },
+        
+        body: JSON.stringify({
+          country: card.country,
+          director: card.director,
+          duration: card.duration,
+          year: card.year,
+          description: card.description,
+          image: card.image.url,
+          trailerLink: card.trailerLink,
+          thumbnail: card.image.formats.thumbnail.url,
+          movieId: card.id,
+          nameRU: card.nameRU,
+              nameEN: card.nameEN,
+
+
+        
+        
+        })
+      }).then((res) => {
+        console.log(res)
+        return getResponseData(res);
+      });
+  //  } else {
+   /*   return fetch(`${BASE_URL}/movies/${cardId}`, {
+        method: 'DELETE',
+        headers:  { 'content-type': 'application/json',
+        Authorization: `Bearer ${localStorage.getItem('jwt')}` },
+      }).then((res) => {
+        return getResponseData(res);
+      });
+    }*/
+  }
+
+
+  
+  export const getSaveCardsMovies = () => {
+    return fetch(`${BASE_URL}/movies`, {
+      method: 'GET',
+      headers: { 'content-type': 'application/json',
+      Authorization: `Bearer ${localStorage.getItem('jwt')}` },
+    }).then((res) => {
+      return getResponseData(res);
+    });
+  }
+
+
+
+
+
 function getResponseData(res) {
     return res.ok ? res.json() : Promise.reject("Произошла ошибка");
   }
