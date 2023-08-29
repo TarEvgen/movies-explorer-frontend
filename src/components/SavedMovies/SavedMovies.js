@@ -2,7 +2,7 @@ import SearchForm from "../SearchForm/SearchForm";
 import MoviesCardList from "../MoviesCardList/MoviesCardList";
 import { useEffect } from "react";
 
-function SavedMovies({ cards, onSearchMovies,  text, status, isCardsMoviesSave }) {
+function SavedMovies({ cards, onSearchMovies,  text, status, isCardsMoviesSave, onCardDelete }) {
 
 
 /*
@@ -17,7 +17,7 @@ function SavedMovies({ cards, onSearchMovies,  text, status, isCardsMoviesSave }
   return (
     <>
       <SearchForm onSearchMovies={onSearchMovies} text={text} status={status} />
-      <MoviesCardList isCardsMoviesSave={isCardsMoviesSave}/>
+      <MoviesCardList isCardsMoviesSave={isCardsMoviesSave} onCardDelete={onCardDelete}/>
     </>
   );
 }

@@ -144,6 +144,18 @@ export const authorize = (email, password) => {
     });
   }
 
+  
+  export const deleteCard = (cardId) => {
+    return fetch(`${BASE_URL}/movies/${cardId}`, {
+      method: 'DELETE',
+      headers:  { 'content-type': 'application/json',
+      Authorization: `Bearer ${localStorage.getItem('jwt')}` },
+    }).then((res) => {
+      return getResponseData(res);
+    });
+  }
+
+
 
 
 

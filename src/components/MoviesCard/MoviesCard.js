@@ -1,8 +1,13 @@
 import "./MoviesCard.css";
+import { useState, useEffect,   } from "react";
 import { useLocation } from "react-router-dom";
 
-function MoviesCard({ handleSaveClick, isSave, cardData, onCardSave, cardSave, isCardsMoviesSave, cards  }) {
+function MoviesCard({ handleSaveClick, isSave, cardData, onCardSave, cardSave, isCardsMoviesSave, cards, onCardDelete, statusMovies  }) {
  
+  const [g, setg] = useState(false);
+
+console.log(statusMovies, "statusMovies")
+
   const location = useLocation()
 
   const routMovies = location.pathname === "/movies"
@@ -12,8 +17,12 @@ function MoviesCard({ handleSaveClick, isSave, cardData, onCardSave, cardSave, i
   const minutesDurationMovies = minutes- hourDurationMovies*60
   const timeConverter = hourDurationMovies >=1 ? `${hourDurationMovies}ч${minutesDurationMovies}м` : `${minutesDurationMovies}м`;
 
+  
+ 
 
-const saveCard = isCardsMoviesSave.find((movie) => movie.movieId === cardData.id)
+  const  saveCard= routMovies ? isCardsMoviesSave.find((movie) => movie.movieId === cardData.id) : isCardsMoviesSave.find((movie) => movie.movieId)
+
+
 console.log( saveCard, '!!!!!!!!5s') 
 
 console.log( isCardsMoviesSave, 'isCardsMoviesSave')
@@ -24,15 +33,26 @@ console.log( isCardsMoviesSave, 'isCardsMoviesSave')
 if(!saveCard) {
 
   onCardSave (cardData);
-
-}
-    
+  console.log("сохраняем карту")
+  //setg(true)
+} else {
+  if (routMovies) {
+   const saveCarddd = isCardsMoviesSave.find((movie) => movie.movieId === cardData.id)
+    console.log(saveCarddd, "удаляем карту")
+    onCardDelete (saveCarddd);
+  console.log("удаляем карту")
+  //setg(false)
+  }else{
+  console.log(cardSave, "удаляем карту!!!!!!")
+  console.log(routMovies, "удаляем карту!!!!!!")
+  onCardDelete (cardSave);}
+}    
 
 
 
   }
   
-console.log(cardData.id)
+//console.log(cardData.id)
 
   return (
     <li className="card">
@@ -45,7 +65,7 @@ console.log(cardData.id)
 }</h2>
 
       <button
-        className={`card__save-button ${saveCard ? "card__save-button_active" : ""}`}
+        className={`card__save-button ${saveCard  ? "card__save-button_active" :  ""}`}
         onClick={handleClickSave}
         type="button"
       ></button>

@@ -15,7 +15,7 @@ const desctopInittalFilmCount = 16;
 const tabletInittalFilmCount = 8;
 const mobileInittalFilmCount = 5;
 
-function MoviesCardList({ cards, onCardSave, isCardsMoviesSave }) {
+function MoviesCardList({ cards, onCardSave, isCardsMoviesSave, onCardDelete, statusMovies }) {
   const [isSave, setIsSave] = useState(false);
 
   const location = useLocation()
@@ -76,6 +76,8 @@ function MoviesCardList({ cards, onCardSave, isCardsMoviesSave }) {
             //handleSaveClick={changeState}
             onCardSave={onCardSave}
             isCardsMoviesSave={isCardsMoviesSave}
+            onCardDelete={onCardDelete}
+            statusMovies={statusMovies}
           />
         ))
         
@@ -86,7 +88,8 @@ function MoviesCardList({ cards, onCardSave, isCardsMoviesSave }) {
             cardSave={card}
             cards={cards}
             isCardsMoviesSave={isCardsMoviesSave}
-           // key={card.id}
+            onCardDelete={onCardDelete}
+            //key={card.id}
             //handleSaveClick={changeState}
             //onCardSave={onCardSave}
             />

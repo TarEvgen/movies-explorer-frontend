@@ -25,7 +25,7 @@ import * as MainApi from "../../utils/MainApi";
 
 function App() {
   const navigate = useNavigate();
-  //const location = useLocation();
+  const location = useLocation();
  // console.log(location, 'history')
   const [isOpenMenuNavigation, setOpenMenuNavigation] = useState(false);
 
@@ -34,6 +34,8 @@ function App() {
   const [isLoggedIn, setLoggedIn] = useState(false); /////////////проверка логина, типа если вошел то тру)))
 
   const [isCardsMoviesSave, setCardsMoviesSave] = useState([]);/////////// Карточки которые сохранил пользователь
+
+  const [statusMovies, setStatusMovies] = useState(false)
 
 
   console.log(isCardsMoviesSave, 'isCardsMoviesSave просто в апи')
@@ -172,14 +174,46 @@ const userId = currentUser._id
   MainApi
     .saveCard(card, userId)
     .then((newCard) => {
-      
-      console.log(newCard, 'новая карта')
+     debugger
+      //setCardsMoviesSave((state) => state.filter((c) => c.id !== card.id))
+      setCardsMoviesSave((state) =>
+        state.map((c) => (c.id === card.id ? newCard : c)))
+     
+     
+        console.log(newCard, 'новая карта')
+      setStatusMovies({status:true, card: newCard})
+
+      //setFilteredMovies()
       /*setCard((state) =>
         state.map((c) => (c._id === card._id ? newCard : c))
       );*/
     })
     .catch((err) => alert(err));
 }
+
+/////////////////////// уудаление сохраненных фильмов
+
+function handleCardDelete (cardData) {
+  console.log(cardData, 'карта для удаления')
+
+  MainApi
+      .deleteCard(cardData._id)
+      .then((res) => {
+        console.log(res, "спасибо карточка всётаки удалена")
+        console.log((state) => state.filter((c) => c._id !== cardData._id), "спасибо карточка всётаки удалена")
+       //debugger
+        setCardsMoviesSave((state) => state.filter((c) => c._id !== cardData._id))
+        setStatusMovies({status:false, card: res})
+        //setCard((state) => state.filter((c) => c._id !== card._id));
+      })
+      .catch((err) => alert(err));
+
+
+
+}
+
+
+
 
 //////////////////// Вернуть все карточки
 function getCardSaveMovies () {
@@ -195,7 +229,7 @@ MainApi.getSaveCardsMovies()
 useEffect(() => {
   getCardSaveMovies();
 
-},[isLoggedIn, currentUser])
+},[isLoggedIn, currentUser, location])
 
 
 //////////////////////////////
@@ -238,6 +272,7 @@ useEffect(() => {
 
   //////////////////////////////
 
+  
 
 
   //// функция фильтраци по строке поиска и чекбоксу
@@ -294,7 +329,11 @@ console.log(currentUser,'currentUser')
           path="/movies"
           element={
             <>
-              <Movies cards={filteredMovies}  onSearchMovies={SearchMovies} onCardSave={handleCardSave} isCardsMoviesSave={isCardsMoviesSave}/>
+              <Movies cards={filteredMovies}  onSearchMovies={SearchMovies} onCardSave={handleCardSave} isCardsMoviesSave={isCardsMoviesSave} onCardDelete={handleCardDelete}
+              
+              statusMovies={statusMovies}
+              
+              />
               <Footer />
             </>
           }
@@ -303,7 +342,7 @@ console.log(currentUser,'currentUser')
           path="/saved-movies"
           element={
             <>
-              <SavedMovies  cards={filteredMovies} onSearchMovies={SearchMovies} isCardsMoviesSave={isCardsMoviesSave} />
+              <SavedMovies  cards={filteredMovies} onSearchMovies={SearchMovies} isCardsMoviesSave={isCardsMoviesSave} onCardDelete={handleCardDelete}/>
               <Footer />
             </>
           }
