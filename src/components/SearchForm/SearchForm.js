@@ -3,7 +3,7 @@ import FilterCheckbox from "../FilterCheckbox/FilterCheckbox";
 import { useEffect, useState } from "react";
 import {  useLocation} from "react-router-dom";
 
-function SearchForm({ onSearchMovies }) {
+function SearchForm({ onSearchMovies, statusMovies }) {
 
  const location = useLocation()
 
@@ -33,7 +33,7 @@ function SearchForm({ onSearchMovies }) {
   useEffect(()=>{
     onSearchMovies(isIndex);
     
-  },[])
+  },[statusMovies])
   
 
   function handleSubmit(e) {
@@ -47,7 +47,7 @@ function SearchForm({ onSearchMovies }) {
         <input
           className="search-form__field-search"
           placeholder="Фильм"
-          required
+          required={location.pathname === "/movies" ? "required" : ""  }
           onChange={handleSearchIndex}
           value={isIndex}
         ></input>

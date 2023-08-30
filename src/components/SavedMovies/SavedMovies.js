@@ -3,7 +3,7 @@ import MoviesCardList from "../MoviesCardList/MoviesCardList";
 import Footer from "../Footer/Footer";
 import { useEffect } from "react";
 
-function SavedMovies({ cards, onSearchMovies,  text, status, isCardsMoviesSave, onCardDelete }) {
+function SavedMovies({ cards, onSearchMovies,  text, status, isCardsMoviesSave, onCardDelete, statusMovies }) {
 
 
 /*
@@ -23,7 +23,7 @@ function SavedMovies({ cards, onSearchMovies,  text, status, isCardsMoviesSave, 
 
   return (
     <>
-      <SearchForm onSearchMovies={onSearchMovies} text={text} status={status} />
+      <SearchForm onSearchMovies={onSearchMovies} text={text} status={status} statusMovies={statusMovies} />
       <MoviesCardList isCardsMoviesSave={isCardsMoviesSave} onCardDelete={onCardDelete}/>
       <Footer />
       

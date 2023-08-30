@@ -221,8 +221,10 @@ function handleCardDelete (cardData) {
       .then((res) => {
       
         
-       debugger
+       
         setCardsMoviesSave((state) => state.filter((c) => c._id !== cardData._id))
+
+
         setStatusMovies({status:false, card: res})
         //setCard((state) => state.filter((c) => c._id !== card._id));
       })
@@ -246,7 +248,7 @@ if (isLoggedIn && currentUser._id) {
 
 
   setCardsMoviesSave(cardsMoviesSaveUser)
-  
+  setStatusMovies({status:false})
   
 
 })
@@ -318,8 +320,32 @@ useEffect(() => {
      
      if (location.pathname === "/movies" )
      
-     { return []} else  {
+     {
+      
+      
+      return []
+    
+    
+    } 
+     
+     
+     
+     else  {
       //debugger
+      const checkedlocalStorage = JSON.parse(localStorage.getItem("checkedSave"))
+      if (checkedlocalStorage) {
+
+        const moviesFilter = isCardsMoviesSave.filter(
+          ({ nameRU, nameEN }) =>
+            nameRU.toLowerCase().includes(searchBar.toLowerCase()) ||
+            nameEN.toLowerCase().includes(searchBar.toLowerCase())
+        );
+
+        return moviesFilter.filter(({ duration }) => duration < 40);
+
+
+      }
+      
       return isCardsMoviesSave
 
 
@@ -330,12 +356,12 @@ useEffect(() => {
 
 
 
-      const checkedlocalStorage = JSON.parse(localStorage.getItem("checked"));
+      const checkedlocalStorage =    location.pathname === "/movies" ?   JSON.parse(localStorage.getItem("checked")) : JSON.parse(localStorage.getItem("checkedSave"))
 
 
 
       if (checkedlocalStorage) {
-        const moviesFilter = moviesAll.filter(
+        const moviesFilter = (location.pathname === "/movies" ?moviesAll: isCardsMoviesSave).filter(
           ({ nameRU, nameEN }) =>
             nameRU.toLowerCase().includes(searchBar.toLowerCase()) ||
             nameEN.toLowerCase().includes(searchBar.toLowerCase())
@@ -343,10 +369,15 @@ useEffect(() => {
 
         return moviesFilter.filter(({ duration }) => duration < 40);
       } else {
-        return moviesAll.filter(
+
+
+        return (location.pathname === "/movies" ?moviesAll: isCardsMoviesSave).filter(
           ({ nameRU, nameEN }) =>
             nameRU.toLowerCase().includes(searchBar.toLowerCase()) ||
             nameEN.toLowerCase().includes(searchBar.toLowerCase())
+
+
+
         );
       }
     }
@@ -419,6 +450,7 @@ useEffect(() => {
               onSearchMovies={SearchMovies} 
               isCardsMoviesSave={filteredMovies} 
               onCardDelete={handleCardDelete}
+              statusMovies={statusMovies}
               isLoggedIn={isLoggedIn}
               >
          
