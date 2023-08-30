@@ -15,6 +15,7 @@ import Profile from "../Profile/Profile";
 import PageNotFound from "../PageNotFound/PageNotFound";
 import { moviesApi } from "../../utils/MoviesApi";
 import { CurrentUserContext } from "../../contexts/CurrentUserContext";
+import ProtectedRoute from "../ProtectedRoute/ProtectedRoute"; 
 //import { getValue } from "@testing-library/user-event/dist/utils";
 
 import * as MainApi from "../../utils/MainApi";
@@ -49,6 +50,10 @@ function App() {
 
   ////////////////////////// Кнопка еще
  
+  useEffect(() => {
+    checkToken();
+// eslint-disable-next-line react-hooks/exhaustive-deps
+  },[])
 
 
   //// получение списка фильмов с апи
@@ -90,18 +95,23 @@ function App() {
 
   const checkToken = () => {
     const jwt = localStorage.getItem('jwt');
+ 
     if (jwt) {
+  
+      
       MainApi
         .getCheckToken(jwt)
         .then((res) => {
           if (res) {
-            console.log(res, "рес при проверки токена")
-            //setLoggedIn(true);
+            
+            setLoggedIn(true);
             setCurrentUser(res)
-           // setUserEmail(res.email);
-            //navigate('/');
+            
+         
+           navigate(location);
           } else {
-          // setLoggedIn(false);
+
+          setLoggedIn(false);
           }
         })
         .catch((err) => alert(err));
@@ -110,10 +120,7 @@ function App() {
 
 
 
-  useEffect(() => {
-    checkToken();
-// eslint-disable-next-line react-hooks/exhaustive-deps
-  },[isLoggedIn])
+  
 
 
 
@@ -139,6 +146,11 @@ function App() {
     return MainApi
       .register(name, email, password)
       .then((res) => {
+
+        handleLogin  ({email: email, password: password })
+
+
+
        // setIsSuccess(true);
        // setIsInfoTooltipOpen(true);
         navigate("/movies");
@@ -152,6 +164,7 @@ function App() {
 /////выход из акаунта
   const outProfile = (e) =>
  {
+  setLoggedIn(false)
   console.log('нажал выйти')
   localStorage.removeItem('jwt')
   localStorage.removeItem('moviesAll')
@@ -218,12 +231,22 @@ function handleCardDelete (cardData) {
 
 //////////////////// Вернуть все карточки
 function getCardSaveMovies () {
-MainApi.getSaveCardsMovies()
+
+if (isLoggedIn && currentUser._id) {
+  MainApi.getSaveCardsMovies()
 .then((cardsMoviesSave) => {
   
-  setCardsMoviesSave(cardsMoviesSave)
-  console.log(cardsMoviesSave, '!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!')
+  const cardsMoviesSaveUser = cardsMoviesSave.filter((cardMovie) => cardMovie.owner === currentUser._id)
+
+
+  setCardsMoviesSave(cardsMoviesSaveUser)
+  console.log(cardsMoviesSaveUser, 'фильмы конкреного пользователя')
+
 })
+
+}
+
+
 }
 
 
@@ -328,34 +351,65 @@ console.log(currentUser,'currentUser')
         />
         <Route
           path="/movies"
+
+
           element={
-            <>
-              <Movies cards={filteredMovies}  onSearchMovies={SearchMovies} onCardSave={handleCardSave} isCardsMoviesSave={isCardsMoviesSave} onCardDelete={handleCardDelete}
-              
-              statusMovies={statusMovies}
-              
-              />
-              <Footer />
-            </>
+            <ProtectedRoute
+            element={Movies}
+            cards={filteredMovies}  
+            onSearchMovies={SearchMovies} 
+            onCardSave={handleCardSave} 
+            isCardsMoviesSave={isCardsMoviesSave}
+            onCardDelete={handleCardDelete}
+            statusMovies={statusMovies}
+            isLoggedIn={isLoggedIn}>
+            </ProtectedRoute>
           }
+          
+
         />
         <Route
           path="/saved-movies"
           element={
-            <>
-              <SavedMovies  cards={filteredMovies} onSearchMovies={SearchMovies} isCardsMoviesSave={isCardsMoviesSave} onCardDelete={handleCardDelete}/>
-              <Footer />
-            </>
-          }
+            <ProtectedRoute
+              element={ SavedMovies } 
+              cards={filteredMovies} 
+              onSearchMovies={SearchMovies} 
+              isCardsMoviesSave={isCardsMoviesSave} 
+              onCardDelete={handleCardDelete}
+              isLoggedIn={isLoggedIn}
+              >
+         
+         </ProtectedRoute>
+     }
+
+           
+
+          
         />
         <Route
           path="/profile"
           element={
-            <>
-              <Profile handleUpdateUser={handleUpdateUser} isServerRes={isServerRes} outProfile={outProfile}/>
-            </>
+            <ProtectedRoute
+          
+          element={
+            
+              Profile 
+           
           }
+          handleUpdateUser={handleUpdateUser} 
+          isServerRes={isServerRes} 
+          outProfile={outProfile}
+          isLoggedIn={isLoggedIn}
+
+          >
+
+          </ProtectedRoute>
+
+        }
+
         />
+
         <Route path="/sign-up" element={<Register handelRegister={handelRegister} />} />
         <Route path="/sign-in" element={<Login handleLogin={handleLogin} />} />
         <Route path="*" element={<PageNotFound />} />

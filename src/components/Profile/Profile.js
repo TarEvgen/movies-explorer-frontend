@@ -109,7 +109,7 @@ resetForm()
       <h2 className="form__name form__name_profile">{`Привет, ${currentUser.name}!`}</h2>
       <label className="form__edit-name">
         Имя
-        <input className="form__edit-input" id="name" name='name' placeholder="Имя"  value={isUserName} onChange={handleChange} required/>
+        <input className="form__edit-input" id="name" name='name' placeholder="Имя" minLength="2" maxLength="30"  value={isUserName} onChange={handleChange} required/>
         
       </label>
       <span className="form__edit-error">{errors['name']}</span>

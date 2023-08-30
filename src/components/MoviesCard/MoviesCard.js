@@ -23,9 +23,7 @@ console.log({ handleSaveClick, isSave, cardData, onCardSave, cardSave, isCardsMo
   const  saveCard= routMovies ? isCardsMoviesSave.find((movie) => movie.movieId === cardData.id) : isCardsMoviesSave.find((movie) => movie.movieId)
 
 
-console.log( saveCard, '!!!!!!!!5s') 
 
-console.log( isCardsMoviesSave, 'isCardsMoviesSave')
 
   function handleClickSave() {
     //console.log('ghjbpjikj cj,snbt d rfhl kbcn')
@@ -33,18 +31,17 @@ console.log( isCardsMoviesSave, 'isCardsMoviesSave')
 if(!saveCard) {
 
   onCardSave (cardData);
-  console.log("сохраняем карту")
+ 
   //setg(true)
 } else {
   if (routMovies) {
    const saveCarddd = isCardsMoviesSave.find((movie) => movie.movieId === cardData.id)
-    console.log(saveCarddd, "удаляем карту")
+    
     onCardDelete (saveCarddd);
-  console.log("удаляем карту")
+  
   //setg(false)
   }else{
-  console.log(cardSave, "удаляем карту!!!!!!")
-  console.log(routMovies, "удаляем карту!!!!!!")
+
   onCardDelete (cardSave);}
 }    
 
@@ -65,7 +62,7 @@ if(!saveCard) {
 }</h2>
 
       <button
-        className={`card__save-button ${saveCard   ? "card__save-button_active" :  ""}`}
+        className={`card__save-button ${saveCard && routMovies ? "card__save-button_active" : saveCard ? "card__save-button_delete" : ""}`}
         onClick={handleClickSave}
         type="button"
       ></button>
