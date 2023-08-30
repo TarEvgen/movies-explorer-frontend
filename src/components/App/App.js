@@ -27,7 +27,8 @@ import * as MainApi from "../../utils/MainApi";
 function App() {
   const navigate = useNavigate();
   const location = useLocation();
- // console.log(location, 'history')
+
+  
   const [isOpenMenuNavigation, setOpenMenuNavigation] = useState(false);
 
   const [currentUser, setCurrentUser] = useState({});
@@ -39,7 +40,8 @@ function App() {
   const [statusMovies, setStatusMovies] = useState(false)
 
 
-  console.log(isCardsMoviesSave, 'isCardsMoviesSave просто в апи')
+  
+  
 
   const [moviesAll, setMoviesAll] = useState(
     JSON.parse(localStorage.getItem("moviesAll")) || []
@@ -80,7 +82,8 @@ function App() {
       Promise.all([moviesApi
         .getAllMovies(), MainApi.loadDataUser()])
         .then(([dataMovies, dataUser]) => {
-          console.log(dataMovies, 'dataMovies', dataUser, 'dataUser')
+          
+          
           
           setMoviesAll(dataMovies);
           setCurrentUser(dataUser);
@@ -88,7 +91,8 @@ function App() {
 
         })
         .catch((err) => alert(err));
-        console.log("ошибка")
+     
+        
     }
   }, [isLoggedIn]);
 
@@ -142,7 +146,8 @@ function App() {
   ///////////////////////////////// регистрация
 
   const handelRegister = ({name ,email, password}) => {
-    console.log({name ,email, password}, 'hkhkh!!!!!')
+    
+    
     return MainApi
       .register(name, email, password)
       .then((res) => {
@@ -165,7 +170,8 @@ function App() {
   const outProfile = (e) =>
  {
   setLoggedIn(false)
-  console.log('нажал выйти')
+
+  
   localStorage.removeItem('jwt')
   localStorage.removeItem('moviesAll')
   localStorage.removeItem('checked')
@@ -177,9 +183,8 @@ function App() {
  ///////////////////////////////// сохранение фильмов
 
  function handleCardSave(card) {
-  console.log(card, 'cardcardcardcardcardcardcardcardcard')
-  console.log(currentUser._id
-    , 'cardcardcardcardcardcardcardcardcard')
+
+  
 
 const userId = currentUser._id
 
@@ -208,14 +213,15 @@ const userId = currentUser._id
 /////////////////////// уудаление сохраненных фильмов
 
 function handleCardDelete (cardData) {
-  console.log(cardData, 'карта для удаления')
+ 
+  
 
   MainApi
       .deleteCard(cardData._id)
       .then((res) => {
-        console.log(res, "спасибо карточка всётаки удалена")
-        console.log((state) => state.filter((c) => c._id !== cardData._id), "спасибо карточка всётаки удалена")
-       //debugger
+      
+        
+       debugger
         setCardsMoviesSave((state) => state.filter((c) => c._id !== cardData._id))
         setStatusMovies({status:false, card: res})
         //setCard((state) => state.filter((c) => c._id !== card._id));
@@ -240,7 +246,8 @@ if (isLoggedIn && currentUser._id) {
 
 
   setCardsMoviesSave(cardsMoviesSaveUser)
-  console.log(cardsMoviesSaveUser, 'фильмы конкреного пользователя')
+  
+  
 
 })
 
@@ -263,12 +270,14 @@ useEffect(() => {
 
   ///////////////////// авторизация
   const handleLogin = ({email, password}) => {
-    console.log(email, password, 'email, password')
+   
+    
     MainApi
       .authorize(email, password)
       .then((res) => {
        // setUserEmail(email);
-       console.log(res, 'res')
+    
+       
         localStorage.setItem("jwt", res.token);
         setLoggedIn(true);
         navigate("/movies");
@@ -287,7 +296,8 @@ useEffect(() => {
       .then((res) => {
         setCurrentUser(res.data);
         setServerRes({message: "данные обновлены успешно"})
-       console.log(res, 'res')
+     
+        
         //closeAllPopups();
       })
       .catch((err) => setServerRes({error: "При обновлении профиля произошла ошибка."}));
@@ -302,10 +312,27 @@ useEffect(() => {
   //// функция фильтраци по строке поиска и чекбоксу
 
   const filterMovies = (searchBar) => {
+   
+   
     if (searchBar.length === 0) {
-      return [];
+     
+     if (location.pathname === "/movies" )
+     
+     { return []} else  {
+      //debugger
+      return isCardsMoviesSave
+
+
+      }
+   
+   
     } else {
+
+
+
       const checkedlocalStorage = JSON.parse(localStorage.getItem("checked"));
+
+
 
       if (checkedlocalStorage) {
         const moviesFilter = moviesAll.filter(
@@ -323,16 +350,31 @@ useEffect(() => {
         );
       }
     }
+  
+  
+  
   };
 
  
-console.log(currentUser,'currentUser')
+
+  
   //// функция поиска фильмов
   function SearchMovies(searchBar) {
-    localStorage.setItem("valueInput", searchBar);
-    const newMovies = filterMovies(searchBar);
-    setFilteredMovies(newMovies);
+
+    location.pathname === "/movies" ? localStorage.setItem("valueInput", searchBar) : localStorage.setItem("valueInputSave", searchBar)
+
     
+
+    
+    const newMovies = filterMovies(searchBar);
+
+  
+    
+
+   setFilteredMovies(newMovies);
+    
+
+
   }
 
   return (
@@ -375,7 +417,7 @@ console.log(currentUser,'currentUser')
               element={ SavedMovies } 
               cards={filteredMovies} 
               onSearchMovies={SearchMovies} 
-              isCardsMoviesSave={isCardsMoviesSave} 
+              isCardsMoviesSave={filteredMovies} 
               onCardDelete={handleCardDelete}
               isLoggedIn={isLoggedIn}
               >

@@ -1,10 +1,16 @@
 import "./SearchForm.css";
 import FilterCheckbox from "../FilterCheckbox/FilterCheckbox";
 import { useEffect, useState } from "react";
+import {  useLocation} from "react-router-dom";
 
 function SearchForm({ onSearchMovies }) {
-  const [isIndex, setIndex] = useState(
-    localStorage.getItem("valueInput") || ""
+
+ const location = useLocation()
+
+
+
+  const [isIndex, setIndex] = useState( location.pathname === "/movies"
+    ? localStorage.getItem("valueInput") || "" : localStorage.getItem("valueInputSave") || ""
   );
 
 
@@ -17,7 +23,7 @@ function SearchForm({ onSearchMovies }) {
 
  
   function shortFilmFilter() {
-    console.log('сработал чекбокс')
+    
     onSearchMovies(isIndex);
   }
 

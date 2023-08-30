@@ -4,7 +4,7 @@ import Footer from "../Footer/Footer";
 
 function Movies({ cards, onSearchMovies,  text, status, onCardSave, isCardsMoviesSave, onCardDelete, statusMovies}) { 
   
-  console.log(isCardsMoviesSave, 'isCardsMoviesSave')
+  
 
   return (
     <>

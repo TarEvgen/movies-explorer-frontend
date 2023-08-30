@@ -7,7 +7,7 @@ import {useFormWithValidation} from "../../Hook/useFormWithValidation"
 function Register({ handelRegister }) {
 
   const { values, handleChange, errors, isValid, resetForm } = useFormWithValidation()
-  console.log(values, 'values')
+ 
 
   
 /*

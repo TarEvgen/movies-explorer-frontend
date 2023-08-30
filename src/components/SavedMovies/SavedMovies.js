@@ -15,12 +15,12 @@ function SavedMovies({ cards, onSearchMovies,  text, status, isCardsMoviesSave, 
   },[])
   */
 
-  console.log({ cards, onSearchMovies,  text, status, isCardsMoviesSave, onCardDelete}, "uuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuu" )
+ 
   
 
 
 
-  console.log(isCardsMoviesSave , 'isCardsMoviesSave')
+
   return (
     <>
       <SearchForm onSearchMovies={onSearchMovies} text={text} status={status} />

@@ -6,7 +6,7 @@ function MoviesCard({ handleSaveClick, isSave, cardData, onCardSave, cardSave, i
  
   const [g, setg] = useState(false);
 
-console.log({ handleSaveClick, isSave, cardData, onCardSave, cardSave, isCardsMoviesSave, cards, onCardDelete, statusMovies  }, "s555555555555555555555")
+
 
   const location = useLocation()
 
@@ -26,7 +26,7 @@ console.log({ handleSaveClick, isSave, cardData, onCardSave, cardSave, isCardsMo
 
 
   function handleClickSave() {
-    //console.log('ghjbpjikj cj,snbt d rfhl kbcn')
+   
 
 if(!saveCard) {
 
@@ -49,7 +49,7 @@ if(!saveCard) {
 
   }
   
-//console.log(cardData.id)
+
 
   return (
     <li className="card">

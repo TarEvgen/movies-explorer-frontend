@@ -20,7 +20,7 @@ function MoviesCardList({ cards, onCardSave, isCardsMoviesSave, onCardDelete, st
 
   const location = useLocation()
 
-  console.log(isCardsMoviesSave, "isCardsMoviesSave")
+  
 
   ///// слушаем разрешения экрана
   const desctop = useMediaQuery("(min-width: 1280px)");
