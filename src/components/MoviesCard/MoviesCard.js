@@ -6,7 +6,7 @@ function MoviesCard({ handleSaveClick, isSave, cardData, onCardSave, cardSave, i
  
   const [g, setg] = useState(false);
 
-console.log(statusMovies, "statusMovies")
+console.log({ handleSaveClick, isSave, cardData, onCardSave, cardSave, isCardsMoviesSave, cards, onCardDelete, statusMovies  }, "s555555555555555555555")
 
   const location = useLocation()
 
@@ -65,7 +65,7 @@ if(!saveCard) {
 }</h2>
 
       <button
-        className={`card__save-button ${saveCard  ? "card__save-button_active" :  ""}`}
+        className={`card__save-button ${saveCard   ? "card__save-button_active" :  ""}`}
         onClick={handleClickSave}
         type="button"
       ></button>

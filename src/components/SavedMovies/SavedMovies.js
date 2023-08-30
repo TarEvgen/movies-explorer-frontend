@@ -9,9 +9,15 @@ function SavedMovies({ cards, onSearchMovies,  text, status, isCardsMoviesSave, 
   useEffect(()=>{
    
     getCardSaveMovies() 
+
+
   },[])
   */
+
+  console.log({ cards, onSearchMovies,  text, status, isCardsMoviesSave, onCardDelete}, "uuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuu" )
   
+
+
 
   console.log(isCardsMoviesSave , 'isCardsMoviesSave')
   return (

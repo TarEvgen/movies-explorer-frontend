@@ -174,13 +174,14 @@ const userId = currentUser._id
   MainApi
     .saveCard(card, userId)
     .then((newCard) => {
-     debugger
+     //debugger
       //setCardsMoviesSave((state) => state.filter((c) => c.id !== card.id))
-      setCardsMoviesSave((state) =>
-        state.map((c) => (c.id === card.id ? newCard : c)))
-     
-     
-        console.log(newCard, 'новая карта')
+     /* setCardsMoviesSave((state) =>
+
+        state.map((c) => (c.id === card.id ? newCard : c)))*/
+        setCardsMoviesSave(isCardsMoviesSave.concat(newCard)) 
+        //setFilteredMovies
+    
       setStatusMovies({status:true, card: newCard})
 
       //setFilteredMovies()
