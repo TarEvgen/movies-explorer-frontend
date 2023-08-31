@@ -3,11 +3,11 @@ import { useLocation } from "react-router";
 
 import "./HeaderMovies.css";
 
-function HeaderMovies({ openMenu }) {
+function HeaderMovies({ openMenu, isLoggedIn }) {
   const location = useLocation();
 
   return (
-    <header className="header header_movies">
+    <header className={`header header_movies ${isLoggedIn? "header_movies_profile" : ""}`}>
       <Link className="logo" to="/"></Link>
 
       <ul className="header__link-list header__link-list_page-movies">
@@ -40,7 +40,7 @@ function HeaderMovies({ openMenu }) {
       <Link className="header__link header__link_page-profile" to="/profile">
         Аккаунт
       </Link>
-      <button className="header__button-menu" onClick={openMenu}></button>
+      <button className={`header__button-menu ${isLoggedIn? "header__button-menu_profile" : ""}`} onClick={openMenu}></button>
     </header>
   );
 }

@@ -2,8 +2,9 @@ import { useMediaQuery } from "@uidotdev/usehooks";
 
 import MoviesCard from "../MoviesCard/MoviesCard";
 import "./MoviesCardList.css";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useLocation } from "react-router-dom";
+import Preloader from "../Preloader/Preloader";
 
 ////// переменные сколько карточек добавлять добавлять
 const desctopRowCardCount = 4;
@@ -18,9 +19,16 @@ const mobileInittalFilmCount = 5;
 function MoviesCardList({ cards, onCardSave, isCardsMoviesSave, onCardDelete, statusMovies }) {
   const [isSave, setIsSave] = useState(false);
 
+
+
+
+
+
+
   const location = useLocation()
 
-  
+  ///console.log(cards.length
+ ///   , 'cards')
 
   ///// слушаем разрешения экрана
   const desctop = useMediaQuery("(min-width: 1280px)");
@@ -42,7 +50,7 @@ function MoviesCardList({ cards, onCardSave, isCardsMoviesSave, onCardDelete, st
    
 
   function changeState() {
-    isSave ? setIsSave(false) : setIsSave(true);
+    !isSave ? setIsSave(false) : setIsSave(true);
   }
 
   const handleClick = () => {
@@ -60,16 +68,30 @@ function MoviesCardList({ cards, onCardSave, isCardsMoviesSave, onCardDelete, st
     }
   };
 
+  
+
+
+
   return (
     <section className="movies-cards">
       <ul className="movies-cards__list">
         
-        
+     
         {
         
-        location.pathname === "/movies" ?
+       
+
+        location.pathname === "/movies" ? 
+
+        
+
+        
+
+        cards.length===0 && localStorage.getItem("valueInput")  ? (<p>Ничего не найдено</p>) : (
 
         cards?.slice(0, visibleMoviesCount).map((card) => (
+          
+          
           <MoviesCard
             cardData={card}
             key={card.id}
@@ -79,13 +101,18 @@ function MoviesCardList({ cards, onCardSave, isCardsMoviesSave, onCardDelete, st
             onCardDelete={onCardDelete}
             statusMovies={statusMovies}
           />
+
+
         ))
+        )
         
+
        :
 
         isCardsMoviesSave.map((card) => (
           <MoviesCard
             cardSave={card}
+            key={card.id}
             cards={cards}
             isCardsMoviesSave={isCardsMoviesSave}
             onCardDelete={onCardDelete}
@@ -96,10 +123,14 @@ function MoviesCardList({ cards, onCardSave, isCardsMoviesSave, onCardDelete, st
         ))
 
         
+
+
+        
+
+
+
         
         }
-
-
 
 
 

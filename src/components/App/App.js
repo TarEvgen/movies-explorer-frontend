@@ -19,6 +19,7 @@ import ProtectedRoute from "../ProtectedRoute/ProtectedRoute";
 //import { getValue } from "@testing-library/user-event/dist/utils";
 
 import * as MainApi from "../../utils/MainApi";
+import Preloader from "../Preloader/Preloader";
 
 
 
@@ -39,6 +40,8 @@ function App() {
 
   const [statusMovies, setStatusMovies] = useState(false)
 
+  const [isLoading, setLoading] = useState(localStorage.getItem('jwt') ? false : true)
+
 
   
   
@@ -54,6 +57,7 @@ function App() {
  
   useEffect(() => {
     checkToken();
+    
 // eslint-disable-next-line react-hooks/exhaustive-deps
   },[])
 
@@ -88,6 +92,7 @@ function App() {
           setMoviesAll(dataMovies);
           setCurrentUser(dataUser);
           localStorage.setItem("moviesAll", JSON.stringify(dataMovies));
+          setLoading(true)
 
         })
         .catch((err) => alert(err));
@@ -99,7 +104,7 @@ function App() {
 
   const checkToken = () => {
     const jwt = localStorage.getItem('jwt');
- 
+    
     if (jwt) {
   
       
@@ -113,13 +118,18 @@ function App() {
             
          
            navigate(location);
+           
+           
           } else {
-
+          
           setLoggedIn(false);
           }
         })
         .catch((err) => alert(err));
     }
+   
+
+    
   };
 
 
@@ -170,12 +180,14 @@ function App() {
   const outProfile = (e) =>
  {
   setLoggedIn(false)
-
+  localStorage.clear()
   
-  localStorage.removeItem('jwt')
+  /*localStorage.removeItem('jwt')
   localStorage.removeItem('moviesAll')
   localStorage.removeItem('checked')
   localStorage.removeItem('valueInput')
+  localStorage.removeItem('valueInput')*/
+
   navigate("/");
  }
 
@@ -328,7 +340,7 @@ useEffect(() => {
     
     } 
      
-     
+    
      
      else  {
       //debugger
@@ -361,7 +373,7 @@ useEffect(() => {
 
 
       if (checkedlocalStorage) {
-        const moviesFilter = (location.pathname === "/movies" ?moviesAll: isCardsMoviesSave).filter(
+        const moviesFilter = (location.pathname === "/movies" ? moviesAll: isCardsMoviesSave).filter(
           ({ nameRU, nameEN }) =>
             nameRU.toLowerCase().includes(searchBar.toLowerCase()) ||
             nameEN.toLowerCase().includes(searchBar.toLowerCase())
@@ -392,6 +404,8 @@ useEffect(() => {
   //// функция поиска фильмов
   function SearchMovies(searchBar) {
 
+    
+
     location.pathname === "/movies" ? localStorage.setItem("valueInput", searchBar) : localStorage.setItem("valueInputSave", searchBar)
 
     
@@ -403,30 +417,38 @@ useEffect(() => {
     
 
    setFilteredMovies(newMovies);
-    
+  
+   
 
 
   }
 
-  return (
+  return    (
     <CurrentUserContext.Provider value={currentUser}>
+      
     <div className="App">
-      <Header openMenu={openMenuNavigation} />
+    
+      <Header openMenu={openMenuNavigation} isLoggedIn={isLoggedIn} isLoading={isLoading} />
       <Routes>
         <Route
           path="/"
           element={
+            !isLoading ? <Preloader/> : (
             <>
               <Main />
               <Footer />
             </>
+            )
           }
         />
         <Route
           path="/movies"
 
+          
 
           element={
+            !isLoading ? <Preloader/> : (
+
             <ProtectedRoute
             element={Movies}
             cards={filteredMovies}  
@@ -437,6 +459,8 @@ useEffect(() => {
             statusMovies={statusMovies}
             isLoggedIn={isLoggedIn}>
             </ProtectedRoute>
+  )
+
           }
           
 
@@ -444,6 +468,7 @@ useEffect(() => {
         <Route
           path="/saved-movies"
           element={
+            !isLoading ? <Preloader/> : (
             <ProtectedRoute
               element={ SavedMovies } 
               cards={filteredMovies} 
@@ -455,6 +480,7 @@ useEffect(() => {
               >
          
          </ProtectedRoute>
+            )
      }
 
            
@@ -462,8 +488,18 @@ useEffect(() => {
           
         />
         <Route
+
+
+
+
           path="/profile"
+
+         
+
+
+
           element={
+            !isLoading ? <Preloader/> : (
             <ProtectedRoute
           
           element={
@@ -479,9 +515,9 @@ useEffect(() => {
           >
 
           </ProtectedRoute>
-
+            )
         }
-
+          
         />
 
         <Route path="/sign-up" element={<Register handelRegister={handelRegister} />} />
@@ -492,7 +528,10 @@ useEffect(() => {
         isOpen={isOpenMenuNavigation}
         closeMenu={closeMenuNavigation}
       />
+    
     </div>
+
+    
      </CurrentUserContext.Provider>
   );
 }
