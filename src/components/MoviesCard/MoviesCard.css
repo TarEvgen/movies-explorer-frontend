@@ -78,11 +78,11 @@
 }
 
 .card__save-button_delete {
- background-image: url(../../images/icon-delete.svg);
- border: none;
- border-radius: 0;
- box-shadow: none;
- background-color: #fff;
+  background-image: url(../../images/icon-delete.svg);
+  border: none;
+  border-radius: 0;
+  box-shadow: none;
+  background-color: #fff;
 }
 
 @media screen and (max-width: 768px) {

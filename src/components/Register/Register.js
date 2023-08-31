@@ -1,34 +1,14 @@
 import { Link } from "react-router-dom";
-import { useState } from "react";
 import "./Register.css";
-import {useFormWithValidation} from "../../Hook/useFormWithValidation"
+import { useFormWithValidation } from "../../Hook/useFormWithValidation";
 
-
-function Register({ handelRegister }) {
-
-  const { values, handleChange, errors, isValid, resetForm } = useFormWithValidation()
- 
-
-  
-/*
-  const handleChange4 = (e) => {
-    const { name, value } = e.target;
-    setFormValue({
-      ...formValue,
-      [name]: value,
-    });
-  };
-
-*/
-
+function Register({ handelRegister, isStatusError }) {
+  const { values, handleChange, errors, isValid } = useFormWithValidation();
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    //const {name, email, password } = formValue;
     handelRegister(values);
   };
-
-
 
   return (
     <>
@@ -38,23 +18,51 @@ function Register({ handelRegister }) {
 
         <label className="form__input-name">
           Имя
-          <input pattern="^[а-яА-ЯёЁa-zA-Z0-9\s\-]+$" className="form__input" type="text"  id="name" name="name" minLength="2" maxLength="30" onChange={handleChange} required  />
-          <span className="form__imput-error">{errors['name']}</span>
+          <input
+            pattern="^[а-яА-ЯёЁa-zA-Z0-9\s\-]+$"
+            className="form__input"
+            type="text"
+            id="name"
+            name="name"
+            minLength="2"
+            maxLength="30"
+            onChange={handleChange}
+            required
+          />
+          <span className="form__imput-error">{errors["name"]}</span>
         </label>
 
         <label className="form__input-name">
           E-mail
-          <input className="form__input" type="email" id="email" name="email" onChange={handleChange} required />
-          <span className="form__imput-error">{errors['email']}</span>
+          <input
+            className="form__input"
+            type="email"
+            id="email"
+            name="email"
+            onChange={handleChange}
+            required
+          />
+          <span className="form__imput-error">{errors["email"]}</span>
         </label>
 
         <label className="form__input-name">
           Пароль
-          <input type="password" className="form__input" id="password" name="password" onChange={handleChange} required />
-          <span className="form__imput-error">{errors['password']}</span>
+          <input
+            type="password"
+            className="form__input"
+            id="password"
+            name="password"
+            onChange={handleChange}
+            required
+          />
+          <span className="form__imput-error">{errors["password"]}</span>
         </label>
-
-        <button className="form__button" type="submit" disabled={!isValid}  >
+        <span
+          className={`form__error ${isStatusError ? "form__error_active" : ""}`}
+        >
+          Произошла ошибка, попробуй еще
+        </span>
+        <button className="form__button" type="submit" disabled={!isValid}>
           Зарегистрироваться
         </button>
 

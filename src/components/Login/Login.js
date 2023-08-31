@@ -1,23 +1,15 @@
 import { Link } from "react-router-dom";
 import "./Login.css";
 
-import {useFormWithValidation} from "../../Hook/useFormWithValidation"
+import { useFormWithValidation } from "../../Hook/useFormWithValidation";
 
-function Login({ handleLogin }) {
-
-  const { values, handleChange, errors, isValid } = useFormWithValidation()
-
-  
-
-  
-
-  
+function Login({ handleLogin, isStatusError }) {
+  const { values, handleChange, errors, isValid } = useFormWithValidation();
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    
+
     handleLogin(values);
-    
   };
 
   return (
@@ -27,15 +19,38 @@ function Login({ handleLogin }) {
         <h2 className="form__name">Рады видеть!</h2>
         <label className="form__input-name">
           E-mail
-          <input type="email" className="form__input" id="email" required name="email" onChange={handleChange}/>
-          <span className="form__imput-error">{errors['email']}</span>
+          <input
+            type="email"
+            className="form__input"
+            id="email"
+            required
+            name="email"
+            onChange={handleChange}
+          />
+          <span className="form__imput-error">{errors["email"]}</span>
         </label>
         <label className="form__input-name">
           Пароль
-          <input type="password" className="form__input" id="password" required name="password" onChange={handleChange}/>
-          <span className="form__imput-error">{errors['password']}</span>
+          <input
+            type="password"
+            className="form__input"
+            id="password"
+            required
+            name="password"
+            onChange={handleChange}
+          />
+          <span className="form__imput-error">{errors["password"]}</span>
         </label>
-        <button className="form__button form__button_login" type="submit" disabled={!isValid}>
+        <span
+          className={`form__error ${isStatusError ? "form__error_active" : ""}`}
+        >
+          Произошла ошибка, попробуй еще
+        </span>
+        <button
+          className="form__button form__button_login"
+          type="submit"
+          disabled={!isValid}
+        >
           Войти
         </button>
         <div className="form__signin">

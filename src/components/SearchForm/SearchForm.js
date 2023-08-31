@@ -1,44 +1,34 @@
 import "./SearchForm.css";
 import FilterCheckbox from "../FilterCheckbox/FilterCheckbox";
 import { useEffect, useState } from "react";
-import {  useLocation} from "react-router-dom";
+import { useLocation } from "react-router-dom";
 
 function SearchForm({ onSearchMovies, statusMovies }) {
+  const location = useLocation();
 
- const location = useLocation()
-
-
-
-  const [isIndex, setIndex] = useState( location.pathname === "/movies"
-    ? localStorage.getItem("valueInput") || "" : localStorage.getItem("valueInputSave") || ""
+  const [isIndex, setIndex] = useState(
+    location.pathname === "/movies"
+      ? localStorage.getItem("valueInput") || ""
+      : localStorage.getItem("valueInputSave") || ""
   );
 
-
   function handleSearchIndex(evt) {
-   const valueInput = evt.target.value;
-   setIndex(valueInput)
-   
+    const valueInput = evt.target.value;
+    setIndex(valueInput);
   }
 
-
- 
   function shortFilmFilter() {
-    
     onSearchMovies(isIndex);
   }
 
-
-
-
-  useEffect(()=>{
+  useEffect(() => {
     onSearchMovies(isIndex);
-    
-  },[statusMovies])
-  
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [statusMovies]);
 
   function handleSubmit(e) {
     e.preventDefault();
-   onSearchMovies(isIndex);
+    onSearchMovies(isIndex);
   }
 
   return (
@@ -47,7 +37,7 @@ function SearchForm({ onSearchMovies, statusMovies }) {
         <input
           className="search-form__field-search"
           placeholder="Фильм"
-          required={location.pathname === "/movies" ? "required" : ""  }
+          required={location.pathname === "/movies" ? "required" : ""}
           onChange={handleSearchIndex}
           value={isIndex}
         ></input>

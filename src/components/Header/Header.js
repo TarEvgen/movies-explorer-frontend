@@ -2,14 +2,11 @@ import React from "react";
 
 import { Route, Routes, Link } from "react-router-dom";
 
-//import { CurrentUserContext } from "../../contexts/CurrentUserContext";
-
 import "./Header.css";
 
 import HeaderMovies from "../HeaderMovies/HeaderMovies";
 
 function Header({ openMenu, isLoggedIn, isLoading }) {
-  //const currentUser = React.useContext(CurrentUserContext);
 
   return (
     <Routes>
@@ -48,40 +45,18 @@ function Header({ openMenu, isLoggedIn, isLoading }) {
           )
         }
       />
-      <Route path="/movies" element={
-      
-      !isLoading ? (
-        <></>
-      ) :
-      <HeaderMovies openMenu={openMenu} />
-      
-      
-      
-      } />
+      <Route
+        path="/movies"
+        element={!isLoading ? <></> : <HeaderMovies openMenu={openMenu} />}
+      />
       <Route
         path="/saved-movies"
-        element={
-        
-          !isLoading ? (
-            <></>
-          ) :
-        
-        <HeaderMovies openMenu={openMenu} />}
+        element={!isLoading ? <></> : <HeaderMovies openMenu={openMenu} />}
       />
 
       <Route
         path="/profile"
-        element={
-          
-
-          !isLoading ? (
-            <></>
-          ) :
-
-
-            <HeaderMovies openMenu={openMenu} />
-          
-        }
+        element={!isLoading ? <></> : <HeaderMovies openMenu={openMenu} />}
       />
     </Routes>
   );

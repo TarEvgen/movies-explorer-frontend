@@ -14,7 +14,7 @@
 
 .form__edit-error {
   font-size: 10px;
-  color: #EE3465;
+  color: #ee3465;
   min-height: 12px;
 }
 
@@ -46,7 +46,7 @@
 }
 
 .form__edit-input:focus-visible {
-  outline: 1px solid #2BE080;
+  outline: 1px solid #2be080;
 }
 
 .button-edit {
@@ -65,22 +65,21 @@
   cursor: pointer;
 }
 
-
 .button-edit_save {
-   margin-bottom: 70px;
-   max-width: 410px;
-   min-height: 45px;
-   margin-right: 50px;
-   margin-left: 50px;
-   border-radius: 3px;
-   background-color: #3456F3;
-   color: #FFFFFF;
+  margin-bottom: 70px;
+  max-width: 410px;
+  min-height: 45px;
+  margin-right: 50px;
+  margin-left: 50px;
+  border-radius: 3px;
+  background-color: #3456f3;
+  color: #ffffff;
 }
 
 .button-edit_save_invalid {
-  background-color: #F8F8F8;
-  color:#C2C2C2;
-} 
+  background-color: #f8f8f8;
+  color: #c2c2c2;
+}
 
 .button-edit_inactive {
   display: none;
@@ -103,26 +102,24 @@
 }
 
 .form__edit-message {
-min-height: 14px;
-margin-top: 200px;
-text-align: center;
-text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-font-family: Inter;
-font-size: 11px;
-font-style: normal;
-font-weight: 400;
-line-height: normal;
+  min-height: 14px;
+  margin-top: 200px;
+  text-align: center;
+  text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  font-family: Inter;
+  font-size: 11px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
 }
 
 .form__edit-message_success {
-  color: #2BE080;
+  color: #2be080;
 }
 
 .form__edit-message_error {
-  color: #FF004C;
+  color: #ff004c;
 }
-
-
 
 @media screen and (max-width: 768px) {
   .form_profile {
