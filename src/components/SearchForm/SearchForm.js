@@ -9,7 +9,7 @@ function SearchForm({ onSearchMovies, statusMovies }) {
   const [isIndex, setIndex] = useState(
     location.pathname === "/movies"
       ? localStorage.getItem("valueInput") || ""
-      : localStorage.getItem("valueInputSave") || ""
+      :  ""
   );
 
   function handleSearchIndex(evt) {
@@ -20,7 +20,7 @@ function SearchForm({ onSearchMovies, statusMovies }) {
   function shortFilmFilter() {
     onSearchMovies(isIndex);
   }
-
+  
   useEffect(() => {
     onSearchMovies(isIndex);
     // eslint-disable-next-line react-hooks/exhaustive-deps

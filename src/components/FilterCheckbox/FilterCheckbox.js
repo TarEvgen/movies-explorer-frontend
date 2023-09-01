@@ -1,5 +1,5 @@
 import "./FilterCheckbox.css";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useLocation } from "react-router-dom";
 
 function FilterCheckbox({ shortFilmFilter }) {
@@ -8,7 +8,7 @@ function FilterCheckbox({ shortFilmFilter }) {
   const [checked, setChecked] = useState(
     location.pathname === "/movies"
       ? JSON.parse(localStorage.getItem("checked")) || false
-      : JSON.parse(localStorage.getItem("checkedSave")) || false
+      : false
   );
 
   function onChanged() {
@@ -22,6 +22,10 @@ function FilterCheckbox({ shortFilmFilter }) {
 
     shortFilmFilter();
   }
+
+  useEffect(() => {
+    localStorage.setItem("checkedSave", JSON.stringify(false));
+  }, [location]);
 
   return (
     <>

@@ -86,18 +86,8 @@ export const saveCard = (card, userId) => {
       nameEN: card.nameEN,
     }),
   }).then((res) => {
-    console.log(res);
     return getResponseData(res);
   });
-  //  } else {
-  /*   return fetch(`${BASE_URL}/movies/${cardId}`, {
-        method: 'DELETE',
-        headers:  { 'content-type': 'application/json',
-        Authorization: `Bearer ${localStorage.getItem('jwt')}` },
-      }).then((res) => {
-        return getResponseData(res);
-      });
-    }*/
 };
 
 export const getSaveCardsMovies = () => {

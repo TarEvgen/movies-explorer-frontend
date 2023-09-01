@@ -16,6 +16,7 @@ function Profile({ handleUpdateUser, isServerRes, outProfile }) {
   const [isUserEmail, UserEmail] = useState(currentUser.email);
   const [isResEditMessage, setResEditMessage] = useState("");
   const [isStatusRes, setStatusRes] = useState(false);
+  const [y, sety] = useState(false);
 
   useEffect(() => {
     setResEditMessage(
@@ -35,13 +36,22 @@ function Profile({ handleUpdateUser, isServerRes, outProfile }) {
   }, [currentUser]);
 
   useEffect(() => {
-    setUserName(values.name);
+    if (
+      currentUser.name === values.name &&
+      currentUser.email === values.email
+    ) {
+      sety(true);
+    } else {
+      sety(false);
+    }
 
+    setUserName(values.name);
     UserEmail(values.email);
   }, [values]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
+
     const name = values.name || currentUser.name;
     const email = values.email || currentUser.email;
     handleUpdateUser({ name, email });
@@ -92,7 +102,7 @@ function Profile({ handleUpdateUser, isServerRes, outProfile }) {
       >
         {isResEditMessage}
       </span>
-      <button className="button-edit" type="submit" disabled={!isValid}>
+      <button className="button-edit" type="submit" disabled={!isValid || y}>
         Редактировать
       </button>
       <button

@@ -72,6 +72,9 @@ function MoviesCardList({
                 />
               ))
           )
+        ) : isCardsMoviesSave.length === 0 &&
+          localStorage.getItem("valueInput") ? (
+          <p>Ничего не найдено</p>
         ) : (
           isCardsMoviesSave.map((card) => (
             <MoviesCard
