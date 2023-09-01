@@ -37,7 +37,6 @@ export const loadDataUser = () => {
 };
 
 export const editProfile = (inputData) => {
-  console.log(inputData, "inputData");
   return fetch(`${BASE_URL}/users/me`, {
     method: "PATCH",
     headers: {
@@ -66,27 +65,6 @@ export const getCheckToken = (token) => {
 };
 
 export const saveCard = (card, userId) => {
-  console.log(userId, "JSON.stringify(card)");
-  console.log(
-    {
-      country: card.country,
-      director: card.director,
-      duration: card.duration,
-      year: card.year,
-      description: card.description,
-      image: card.image.url,
-      trailerLink: card.trailerLink,
-      thumbnail: card.image.formats.thumbnail.url,
-      movieId: card.id,
-      nameRU: card.nameRU,
-      nameEN: card.nameEN,
-      //owner: userId,
-    },
-    "JSON.stringify(card)"
-  );
-  //console.log(JSON.parse(card), 'JSON.stringify(card)')
-
-  // if (!isLiked) {
   return fetch(`${BASE_URL}/movies`, {
     method: "POST",
     headers: {

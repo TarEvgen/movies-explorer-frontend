@@ -1,6 +1,12 @@
 import "./App.css";
 import { useState, useEffect } from "react";
-import { Routes, Route, useNavigate, useLocation } from "react-router-dom";
+import {
+  Routes,
+  Route,
+  useNavigate,
+  useLocation,
+  Navigate,
+} from "react-router-dom";
 
 import Header from "../Header/Header";
 import Register from "../Register/Register";
@@ -313,16 +319,27 @@ function App() {
           <Route
             path="/sign-up"
             element={
-              <Register
-                handelRegister={handelRegister}
-                isStatusError={isStatusError}
-              />
+              isLoggedIn ? (
+                <Navigate to="/movies" replace />
+              ) : (
+                <Register
+                  handelRegister={handelRegister}
+                  isStatusError={isStatusError}
+                />
+              )
             }
           />
           <Route
             path="/sign-in"
             element={
-              <Login handleLogin={handleLogin} isStatusError={isStatusError} />
+              isLoggedIn ? (
+                <Navigate to="/movies" replace />
+              ) : (
+                <Login
+                  handleLogin={handleLogin}
+                  isStatusError={isStatusError}
+                />
+              )
             }
           />
           <Route path="*" element={<PageNotFound />} />

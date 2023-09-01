@@ -3,16 +3,31 @@ import "./Profile.css";
 import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 import { useFormWithValidation } from "../../Hook/useFormWithValidation";
 import { useState, useEffect } from "react";
+import { useLocation } from "react-router-dom";
 
 function Profile({ handleUpdateUser, isServerRes, outProfile }) {
   const { values, handleChange, errors, isValid, resetForm } =
     useFormWithValidation();
 
   const currentUser = React.useContext(CurrentUserContext);
-  console.log(currentUser);
+  const location = useLocation();
 
   const [isUserName, setUserName] = useState(currentUser.name);
   const [isUserEmail, UserEmail] = useState(currentUser.email);
+  const [isResEditMessage, setResEditMessage] = useState("");
+  const [isStatusRes, setStatusRes] = useState(false);
+
+  useEffect(() => {
+    setResEditMessage(
+      isServerRes.error ? isServerRes.error : isServerRes.message
+    );
+    setStatusRes(true);
+  }, [isServerRes]);
+
+  useEffect(() => {
+    setResEditMessage("");
+    setStatusRes(false);
+  }, [location]);
 
   useEffect(() => {
     setUserName(currentUser.name);
@@ -68,12 +83,14 @@ function Profile({ handleUpdateUser, isServerRes, outProfile }) {
       <span className="form__edit-error">{errors["email"]}</span>
       <span
         className={`form__edit-message ${
-          isServerRes.error
-            ? "form__edit-message_error"
-            : "form__edit-message_success"
+          isStatusRes
+            ? isServerRes.error
+              ? "form__edit-message_error"
+              : "form__edit-message_success"
+            : ""
         }`}
       >
-        {isServerRes.error ? isServerRes.error : isServerRes.message}
+        {isResEditMessage}
       </span>
       <button className="button-edit" type="submit" disabled={!isValid}>
         Редактировать
