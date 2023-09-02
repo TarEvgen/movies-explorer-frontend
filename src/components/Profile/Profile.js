@@ -4,6 +4,7 @@ import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 import { useFormWithValidation } from "../../Hook/useFormWithValidation";
 import { useState, useEffect } from "react";
 import { useLocation } from "react-router-dom";
+import { REGEX_EMAIL } from "../../utils/Constants";
 
 function Profile({ handleUpdateUser, isServerRes, outProfile }) {
   const { values, handleChange, errors, isValid, resetForm } =
@@ -16,7 +17,7 @@ function Profile({ handleUpdateUser, isServerRes, outProfile }) {
   const [isUserEmail, UserEmail] = useState(currentUser.email);
   const [isResEditMessage, setResEditMessage] = useState("");
   const [isStatusRes, setStatusRes] = useState(false);
-  const [y, sety] = useState(false);
+  const [isSameValue, setSameValue] = useState(false);
 
   useEffect(() => {
     setResEditMessage(
@@ -36,22 +37,29 @@ function Profile({ handleUpdateUser, isServerRes, outProfile }) {
   }, [currentUser]);
 
   useEffect(() => {
-    if (
-      currentUser.name === values.name &&
-      currentUser.email === values.email
-    ) {
-      sety(true);
+    if (currentUser.email === values.email) {
+      setSameValue(true);
     } else {
-      sety(false);
+      setSameValue(false);
+    }
+
+    UserEmail(values.email);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [values.email]);
+
+  useEffect(() => {
+    if (currentUser.name === values.name) {
+      setSameValue(true);
+    } else {
+      setSameValue(false);
     }
 
     setUserName(values.name);
-    UserEmail(values.email);
-  }, [values]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [values.name]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-
     const name = values.name || currentUser.name;
     const email = values.email || currentUser.email;
     handleUpdateUser({ name, email });
@@ -84,6 +92,7 @@ function Profile({ handleUpdateUser, isServerRes, outProfile }) {
           id="email"
           name="email"
           placeholder="E-mail"
+          pattern={REGEX_EMAIL}
           value={isUserEmail}
           required
           type="email"
@@ -102,7 +111,11 @@ function Profile({ handleUpdateUser, isServerRes, outProfile }) {
       >
         {isResEditMessage}
       </span>
-      <button className="button-edit" type="submit" disabled={!isValid || y}>
+      <button
+        className="button-edit"
+        type="submit"
+        disabled={!isValid || isSameValue}
+      >
         Редактировать
       </button>
       <button

@@ -1,16 +1,34 @@
-import { Link } from "react-router-dom";
+import { useState, useEffect } from "react";
+import { Link, useLocation } from "react-router-dom";
 import "./Login.css";
 
 import { useFormWithValidation } from "../../Hook/useFormWithValidation";
+import { REGEX_EMAIL } from "../../utils/Constants";
 
 function Login({ handleLogin, isStatusError }) {
   const { values, handleChange, errors, isValid } = useFormWithValidation();
+  const [isBlockingSending, setBlockingSending] = useState(false);
+  const [isStatusMessageError, setStatusMessageError] = useState(false);
+
+  const location = useLocation();
 
   const handleSubmit = (e) => {
     e.preventDefault();
-
     handleLogin(values);
+    setBlockingSending(true);
   };
+
+  useEffect(() => {
+    setBlockingSending(false);
+  }, [isStatusError, values]);
+
+  useEffect(() => {
+    setStatusMessageError(true);
+  }, [isStatusError]);
+
+  useEffect(() => {
+    setStatusMessageError(false);
+  }, [location]);
 
   return (
     <>
@@ -23,6 +41,7 @@ function Login({ handleLogin, isStatusError }) {
             type="email"
             className="form__input"
             id="email"
+            pattern={REGEX_EMAIL}
             required
             name="email"
             onChange={handleChange}
@@ -42,14 +61,16 @@ function Login({ handleLogin, isStatusError }) {
           <span className="form__imput-error">{errors["password"]}</span>
         </label>
         <span
-          className={`form__error ${isStatusError ? "form__error_active" : ""}`}
+          className={`form__error ${
+            isStatusMessageError ? "form__error_active" : ""
+          }`}
         >
           Произошла ошибка, попробуй еще
         </span>
         <button
           className="form__button form__button_login"
           type="submit"
-          disabled={!isValid}
+          disabled={!isValid || isBlockingSending}
         >
           Войти
         </button>

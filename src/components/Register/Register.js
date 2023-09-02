@@ -1,14 +1,34 @@
-import { Link } from "react-router-dom";
+import { useState, useEffect } from "react";
+import { Link, useLocation } from "react-router-dom";
 import "./Register.css";
 import { useFormWithValidation } from "../../Hook/useFormWithValidation";
+import { REGEX_EMAIL } from "../../utils/Constants";
 
 function Register({ handelRegister, isStatusError }) {
+  const location = useLocation();
   const { values, handleChange, errors, isValid } = useFormWithValidation();
+  const [isBlockingSending, setBlockingSending] = useState(false);
+  const [isStatusMessageError, setStatusMessageError] = useState(false);
+
+  console.log(isStatusError, "isStatusError");
 
   const handleSubmit = (e) => {
     e.preventDefault();
     handelRegister(values);
+    setBlockingSending(true);
   };
+
+  useEffect(() => {
+    setBlockingSending(false);
+  }, [isStatusError, values]);
+
+  useEffect(() => {
+    setStatusMessageError(true);
+  }, [isStatusError]);
+
+  useEffect(() => {
+    setStatusMessageError(false);
+  }, [location]);
 
   return (
     <>
@@ -36,10 +56,11 @@ function Register({ handelRegister, isStatusError }) {
           E-mail
           <input
             className="form__input"
-            type="email"
+            type="text"
             id="email"
             name="email"
             onChange={handleChange}
+            pattern={REGEX_EMAIL}
             required
           />
           <span className="form__imput-error">{errors["email"]}</span>
@@ -58,11 +79,17 @@ function Register({ handelRegister, isStatusError }) {
           <span className="form__imput-error">{errors["password"]}</span>
         </label>
         <span
-          className={`form__error ${isStatusError ? "form__error_active" : ""}`}
+          className={`form__error ${
+            isStatusMessageError ? "form__error_active" : ""
+          }`}
         >
           Произошла ошибка, попробуй еще
         </span>
-        <button className="form__button" type="submit" disabled={!isValid}>
+        <button
+          className="form__button"
+          type="submit"
+          disabled={!isValid || isBlockingSending}
+        >
           Зарегистрироваться
         </button>
 

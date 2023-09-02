@@ -102,11 +102,10 @@ function App() {
     return MainApi.register(name, email, password)
       .then((res) => {
         handleLogin({ email: email, password: password });
-
         navigate("/movies");
       })
-      .catch(() => {
-        setStatusError(true);
+      .catch((err) => {
+        isStatusError ? setStatusError(false) : setStatusError(true)
       });
   };
 
@@ -157,7 +156,7 @@ function App() {
   useEffect(() => {
     getCardSaveMovies();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [isLoggedIn, currentUser, location]);
+  }, [isLoggedIn, location]);
 
   const handleLogin = ({ email, password }) => {
     MainApi.authorize(email, password)
@@ -167,7 +166,7 @@ function App() {
         navigate("/movies");
       })
       .catch(() => {
-        setStatusError(true);
+        isStatusError ? setStatusError(false) : setStatusError(true)
       });
   };
 
