@@ -40,6 +40,10 @@
   transition: opacity 0.7s;
 }
 
+.button-still_inactive {
+  display: none;
+}
+
 .button-still:hover {
   opacity: 0.7;
 }

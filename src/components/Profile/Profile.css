@@ -9,7 +9,13 @@
   display: flex;
   justify-content: space-between;
   flex-direction: row;
-  margin-bottom: 16px;
+  margin-bottom: 3px;
+}
+
+.form__edit-error {
+  font-size: 10px;
+  color: #ee3465;
+  min-height: 12px;
 }
 
 .form__edit-name:last-of-type {
@@ -40,7 +46,7 @@
 }
 
 .form__edit-input:focus-visible {
-  outline: 1px solid #2BE080;
+  outline: 1px solid #2be080;
 }
 
 .button-edit {
@@ -54,9 +60,29 @@
   line-height: normal;
   border: 0;
   background-color: #fff;
-  margin-top: 221px;
+  margin-top: 21px;
   transition: opacity 0.7s;
   cursor: pointer;
+}
+
+.button-edit_save {
+  margin-bottom: 70px;
+  max-width: 410px;
+  min-height: 45px;
+  margin-right: 50px;
+  margin-left: 50px;
+  border-radius: 3px;
+  background-color: #3456f3;
+  color: #ffffff;
+}
+
+.button-edit_save_invalid {
+  background-color: #f8f8f8;
+  color: #c2c2c2;
+}
+
+.button-edit_inactive {
+  display: none;
 }
 
 .button-edit:hover {
@@ -73,6 +99,26 @@
   margin: 0;
   padding: 0;
   margin-bottom: 16px;
+}
+
+.form__edit-message {
+  min-height: 14px;
+  margin-top: 200px;
+  text-align: center;
+  text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  font-family: Inter;
+  font-size: 11px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+
+.form__edit-message_success {
+  color: #2be080;
+}
+
+.form__edit-message_error {
+  color: #ff004c;
 }
 
 @media screen and (max-width: 768px) {

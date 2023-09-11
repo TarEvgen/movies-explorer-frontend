@@ -40,8 +40,15 @@
   font-style: normal;
   font-weight: 400;
   line-height: normal;
-  text-decoration: none;
   margin-top: 184px;
+  border: none;
+  background-color: #fff;
+  cursor: pointer;
+  transition: opacity 0.8s;
+}
+
+.page__button-back:hover {
+  opacity: 0.6;
 }
 
 @media screen and (max-width: 620px) {
